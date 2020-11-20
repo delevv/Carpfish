@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.205" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Carpfish.Common\Carpfish.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Carpfish.Data.Common\Carpfish.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Carpfish.Data.Models\Carpfish.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Carpfish.Data\Carpfish.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Carpfish.Services.Data\Carpfish.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Carpfish.Services.Mapping\Carpfish.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\Carpfish.Services.Messaging\Carpfish.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\Carpfish.Services\Carpfish.Services.csproj" />
+  </ItemGroup>
+
+</Project>

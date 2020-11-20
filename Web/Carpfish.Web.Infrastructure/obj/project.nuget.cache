@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "8MvwnsKRq5rVLJnuxmUmSQIE6oGKcf2YcfVaz+B2Lu0Z/oHTtTAc6cvdUN5I7LhXhB1b5dafYDQb0OC9K1HAyw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\user\\Desktop\\Carpfish\\Web\\Carpfish.Web.Infrastructure\\Carpfish.Web.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512"
+  ],
+  "logs": []
+}
