@@ -12,8 +12,8 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Carpfish.Data", "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data", "Carpfish.Data.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Carpfish.Web", "C:\\Users\\user\\Desktop\\Carpfish\\Web\\Carpfish.Web", "Carpfish.Web.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Carpfish.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data", "Carpfish.Data.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Carpfish.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\Desktop\\Carpfish\\Web\\Carpfish.Web", "Carpfish.Web.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Carpfish.Web.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -9495,6 +9495,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj": {
               "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj"
@@ -9534,6 +9535,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "BuildBundlerMinifier": {
             "target": "Package",
@@ -9584,7 +9586,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
