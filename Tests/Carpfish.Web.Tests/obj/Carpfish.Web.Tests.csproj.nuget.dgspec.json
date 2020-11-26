@@ -165,6 +165,9 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
+              "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj"
+              },
               "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data.Common\\Carpfish.Data.Common.csproj": {
                 "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data.Common\\Carpfish.Data.Common.csproj"
               }

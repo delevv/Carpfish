@@ -16,6 +16,9 @@ namespace Carpfish.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Items = new HashSet<Item>();
+            this.Lakes = new HashSet<Lake>();
+            this.Trophies = new HashSet<Trophy>();
         }
 
         // Audit info
@@ -33,5 +36,11 @@ namespace Carpfish.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Item> Items { get; set; }
+
+        public virtual ICollection<Lake> Lakes { get; set; }
+
+        public virtual ICollection<Trophy> Trophies { get; set; }
     }
 }

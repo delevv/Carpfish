@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Carpfish.Common\Carpfish.Common.csproj" />
     <ProjectReference Include="..\Carpfish.Data.Common\Carpfish.Data.Common.csproj" />
   </ItemGroup>
   

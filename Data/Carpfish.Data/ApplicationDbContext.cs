@@ -28,17 +28,19 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<TrophyImage> TrophyImages { get; set; }
-
-        public DbSet<ItemImage> ItemImages { get; set; }
-
-        public DbSet<LakeImage> LakeImages { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         public DbSet<Item> Items { get; set; }
 
         public DbSet<Lake> Lakes { get; set; }
 
         public DbSet<Trophy> Trophies { get; set; }
+
+        public DbSet<TrophyImage> TrophyImages { get; set; }
+
+        public DbSet<ItemImage> ItemImages { get; set; }
+
+        public DbSet<LakeImage> LakeImages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

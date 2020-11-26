@@ -366,6 +366,16 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "Carpfish.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Carpfish.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Carpfish.Common.dll": {}
+        }
+      },
       "Carpfish.Data.Common/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -1097,6 +1107,11 @@
         "version.txt"
       ]
     },
+    "Carpfish.Common/1.0.0": {
+      "type": "project",
+      "path": "../../Carpfish.Common/Carpfish.Common.csproj",
+      "msbuildProject": "../../Carpfish.Common/Carpfish.Common.csproj"
+    },
     "Carpfish.Data.Common/1.0.0": {
       "type": "project",
       "path": "../Carpfish.Data.Common/Carpfish.Data.Common.csproj",
@@ -1105,6 +1120,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
+      "Carpfish.Common >= 1.0.0",
       "Carpfish.Data.Common >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.9",
       "StyleCop.Analyzers >= 1.2.0-beta.205"
@@ -1141,6 +1157,9 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
+            "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Carpfish.Common\\Carpfish.Common.csproj"
+            },
             "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data.Common\\Carpfish.Data.Common.csproj": {
               "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data.Common\\Carpfish.Data.Common.csproj"
             }

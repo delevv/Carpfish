@@ -1,6 +1,7 @@
 ﻿namespace Carpfish.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using Carpfish.Data.Common.Models;
 
@@ -11,12 +12,12 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         public string OwnerId { get; set; }
 
         public virtual ApplicationUser Owner { get; set; }
 
-        public string Extension { get; set; }
-
+        [Required]
         public string Url { get; set; }
     }
 }
