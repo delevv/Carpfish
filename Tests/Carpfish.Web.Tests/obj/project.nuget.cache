@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IRVLvdyBueWvqIC7mWw/TkHAUkVSHgRUMWmiNq6pklDYalsDHTKI9rW31ObOklPpOgeI+z4giMuBFT8aJ4+rgg==",
+  "dgSpecHash": "xNsnMDsUI1RZqe//lqR9gKYLD7pB5BDOK5lF7qHIVigRXQXAZ70pwaz6JekXNIWqS/gEb6Z6v/mN1GFG3mlejQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Carpfish\\Tests\\Carpfish.Web.Tests\\Carpfish.Web.Tests.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.10\\microsoft.aspnetcore.http.features.3.1.10.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.9\\microsoft.aspnetcore.identity.ui.3.1.9.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\3.1.9\\microsoft.aspnetcore.mvc.razor.extensions.3.1.9.nupkg.sha512",
@@ -65,7 +66,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.logging.eventsource\\3.1.9\\microsoft.extensions.logging.eventsource.3.1.9.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\3.1.9\\microsoft.extensions.options.configurationextensions.3.1.9.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.10\\microsoft.extensions.primitives.3.1.10.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identity.client\\3.0.8\\microsoft.identity.client.3.0.8.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\5.5.0\\microsoft.identitymodel.jsonwebtokens.5.5.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.logging\\5.5.0\\microsoft.identitymodel.logging.5.5.0.nupkg.sha512",

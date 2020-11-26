@@ -1,0 +1,77 @@
+﻿@model Carpfish.Web.ViewModels.Lakes.AddLakeInputModel
+@{
+    this.ViewData["Title"] = "Add new lake";
+    var countriesItems = this.Model.CountriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" asp-items="countriesItems" class="form-control"></select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Area"></label>
+        <input asp-for="Area" type="number" class="form-control" />
+        <span asp-validation-for="Area" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MainImage"></label>
+        <div class="custom-file">
+            <input asp-for="MainImage" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose File...</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="OtherImages"></label>
+        <div class="custom-file">
+            <input multiple asp-for="OtherImages" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose Files...</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Coordinates"></label>
+        <input asp-for="Coordinates" class="form-control" />
+        <span asp-validation-for="Coordinates" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WebsiteUrl"></label>
+        <input asp-for="WebsiteUrl" class="form-control" />
+        <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="radio" asp-for="IsFree" value="True" /> Free
+        </label>
+        <label>
+            <input type="radio" asp-for="IsFree" value="False" /> Paid
+        </label>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}
