@@ -12,7 +12,7 @@
     using Carpfish.Services.Mapping;
     using Carpfish.Services.Messaging;
     using Carpfish.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -66,6 +66,24 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<ILakesService, LakesService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
+            // External login providers
+            // services.AddAuthentication()
+            //    .AddFacebook(facebookOptions =>
+            //    {
+            //        facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+            //        facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            //        facebookOptions.Fields.Add("name");
+            //    });
+            Account account = new Account(
+                this.configuration["Cloudinary:AppName"],
+                this.configuration["Cloudinary:AppKey"],
+                this.configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
