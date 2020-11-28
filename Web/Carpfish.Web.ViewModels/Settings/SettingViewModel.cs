@@ -1,9 +1,8 @@
 ﻿namespace Carpfish.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

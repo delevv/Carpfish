@@ -1747,6 +1747,7 @@
           "Carpfish.Data.Common": "1.0.0",
           "Carpfish.Data.Models": "1.0.0",
           "Carpfish.Services.Mapping": "1.0.0",
+          "Carpfish.Web.ViewModels": "1.0.0",
           "CloudinaryDotNet": "1.14.0",
           "Microsoft.AspNetCore.Http.Features": "3.1.10"
         },
@@ -1781,6 +1782,21 @@
         },
         "runtime": {
           "bin/placeholder/Carpfish.Services.Messaging.dll": {}
+        }
+      },
+      "Carpfish.Web.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Carpfish.Data.Models": "1.0.0",
+          "Carpfish.Services.Mapping": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "3.1.10"
+        },
+        "compile": {
+          "bin/placeholder/Carpfish.Web.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Carpfish.Web.ViewModels.dll": {}
         }
       }
     }
@@ -6223,6 +6239,11 @@
       "type": "project",
       "path": "../../Services/Carpfish.Services.Messaging/Carpfish.Services.Messaging.csproj",
       "msbuildProject": "../../Services/Carpfish.Services.Messaging/Carpfish.Services.Messaging.csproj"
+    },
+    "Carpfish.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../../Web/Carpfish.Web.ViewModels/Carpfish.Web.ViewModels.csproj",
+      "msbuildProject": "../../Web/Carpfish.Web.ViewModels/Carpfish.Web.ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -1,11 +1,11 @@
-﻿using Carpfish.Data.Common.Repositories;
-using Carpfish.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Carpfish.Services.Data
+﻿namespace Carpfish.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Carpfish.Data.Common.Repositories;
+    using Carpfish.Data.Models;
+
     public class CountriesService : ICountriesService
     {
         private readonly IRepository<Country> countriesRepository;

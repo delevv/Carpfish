@@ -1,6 +1,8 @@
 ﻿namespace Carpfish.Data.Models
 {
-    public class ItemImage
+    using Carpfish.Data.Common.Models;
+
+    public class ItemImage : BaseDeletableModel<int>
     {
         public int ItemId { get; set; }
 

@@ -2974,6 +2974,7 @@
           "Carpfish.Data.Common": "1.0.0",
           "Carpfish.Data.Models": "1.0.0",
           "Carpfish.Services.Mapping": "1.0.0",
+          "Carpfish.Web.ViewModels": "1.0.0",
           "CloudinaryDotNet": "1.14.0",
           "Microsoft.AspNetCore.Http.Features": "3.1.10"
         },

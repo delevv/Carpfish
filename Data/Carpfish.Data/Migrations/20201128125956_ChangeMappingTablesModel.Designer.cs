@@ -4,14 +4,16 @@ using Carpfish.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Carpfish.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201128125956_ChangeMappingTablesModel")]
+    partial class ChangeMappingTablesModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,6 +311,9 @@ namespace Carpfish.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<double>("Area")
                         .HasColumnType("float");
 
@@ -338,10 +343,6 @@ namespace Carpfish.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("RatersCount")
                         .HasColumnType("int");
 
@@ -353,11 +354,11 @@ namespace Carpfish.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("CountryId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Lakes");
                 });
@@ -666,15 +667,13 @@ namespace Carpfish.Data.Migrations
 
             modelBuilder.Entity("Carpfish.Data.Models.Lake", b =>
                 {
+                    b.HasOne("Carpfish.Data.Models.ApplicationUser", null)
+                        .WithMany("Lakes")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Carpfish.Data.Models.Country", "Country")
                         .WithMany("Lakes")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Carpfish.Data.Models.ApplicationUser", "Owner")
-                        .WithMany("Lakes")
-                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

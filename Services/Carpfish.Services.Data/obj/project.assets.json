@@ -495,6 +495,21 @@
         "runtime": {
           "bin/placeholder/Carpfish.Services.Mapping.dll": {}
         }
+      },
+      "Carpfish.Web.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Carpfish.Data.Models": "1.0.0",
+          "Carpfish.Services.Mapping": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "3.1.10"
+        },
+        "compile": {
+          "bin/placeholder/Carpfish.Web.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Carpfish.Web.ViewModels.dll": {}
+        }
       }
     }
   },
@@ -1463,6 +1478,11 @@
       "type": "project",
       "path": "../Carpfish.Services.Mapping/Carpfish.Services.Mapping.csproj",
       "msbuildProject": "../Carpfish.Services.Mapping/Carpfish.Services.Mapping.csproj"
+    },
+    "Carpfish.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../../Web/Carpfish.Web.ViewModels/Carpfish.Web.ViewModels.csproj",
+      "msbuildProject": "../../Web/Carpfish.Web.ViewModels/Carpfish.Web.ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1470,6 +1490,7 @@
       "Carpfish.Data.Common >= 1.0.0",
       "Carpfish.Data.Models >= 1.0.0",
       "Carpfish.Services.Mapping >= 1.0.0",
+      "Carpfish.Web.ViewModels >= 1.0.0",
       "CloudinaryDotNet >= 1.14.0",
       "Microsoft.AspNetCore.Http.Features >= 3.1.10",
       "StyleCop.Analyzers >= 1.2.0-beta.205"
@@ -1514,6 +1535,9 @@
             },
             "C:\\Users\\user\\Desktop\\Carpfish\\Services\\Carpfish.Services.Mapping\\Carpfish.Services.Mapping.csproj": {
               "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Services\\Carpfish.Services.Mapping\\Carpfish.Services.Mapping.csproj"
+            },
+            "C:\\Users\\user\\Desktop\\Carpfish\\Web\\Carpfish.Web.ViewModels\\Carpfish.Web.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\Carpfish\\Web\\Carpfish.Web.ViewModels\\Carpfish.Web.ViewModels.csproj"
             }
           }
         }

@@ -3,10 +3,12 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Carpfish.Web.ViewModels.Lakes;
+
     public interface ILakesService
     {
         Task<IEnumerable<T>> GetAllAsync<T>();
 
-        Task<string> AddAsync();
+        Task AddAsync(AddLakeInputModel input, string userId);
     }
 }

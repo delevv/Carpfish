@@ -88,16 +88,6 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
-            // set composite keys
-            builder.Entity<ItemImage>()
-                .HasKey(x => new { x.ItemId, x.ImageId });
-
-            builder.Entity<TrophyImage>()
-               .HasKey(x => new { x.TrophyId, x.ImageId });
-
-            builder.Entity<LakeImage>()
-               .HasKey(x => new { x.LakeId, x.ImageId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

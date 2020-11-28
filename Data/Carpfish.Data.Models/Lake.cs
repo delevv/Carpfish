@@ -19,6 +19,11 @@
         public string Name { get; set; }
 
         [Required]
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
+        [Required]
         [Range(GlobalConstants.LakeMinArea, GlobalConstants.LakeMaxArea)]
         public double Area { get; set; }
 
