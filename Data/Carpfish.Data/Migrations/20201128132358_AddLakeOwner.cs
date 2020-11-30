@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Carpfish.Data.Migrations
+﻿namespace Carpfish.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddLakeOwner : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "83Ej74I30q5eM8yEmVtgRyPfG7Ihp7UWN4MtoPxk0uGfief85boNeBCDX0V1hNq3Ym8ESy4/tKa5z9RkCmk57w==",
+  "dgSpecHash": "4o5LUASwkU1++X1h+qvw8UefSocljHGXShx3ByFNb+Ybl6Xw+RdBjkZr/Xdvy+ZjUYbfLtisHrcuDalkru30ZA==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Carpfish\\Services\\Carpfish.Services.Messaging\\Carpfish.Services.Messaging.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.0.1\\microsoft.netcore.targets.1.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\sendgrid\\9.21.0\\sendgrid.9.21.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\sendgrid\\9.21.2\\sendgrid.9.21.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\starkbank-ecdsa\\1.2.0\\starkbank-ecdsa.1.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512",

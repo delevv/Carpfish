@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Carpfish.Data.Migrations
+﻿namespace Carpfish.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialAddModelsWithValidations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +19,7 @@ namespace Carpfish.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -47,7 +48,7 @@ namespace Carpfish.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -64,7 +65,7 @@ namespace Carpfish.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 40, nullable: false)
+                    Name = table.Column<string>(maxLength: 40, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -79,7 +80,7 @@ namespace Carpfish.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -97,7 +98,7 @@ namespace Carpfish.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -112,7 +113,7 @@ namespace Carpfish.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -133,7 +134,7 @@ namespace Carpfish.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -153,7 +154,7 @@ namespace Carpfish.Data.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -171,7 +172,7 @@ namespace Carpfish.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    RoleId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -197,7 +198,7 @@ namespace Carpfish.Data.Migrations
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -218,7 +219,7 @@ namespace Carpfish.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     OwnerId = table.Column<string>(nullable: false),
-                    Url = table.Column<string>(nullable: false)
+                    Url = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -244,7 +245,7 @@ namespace Carpfish.Data.Migrations
                     Condition = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     OwnerId = table.Column<string>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -281,7 +282,7 @@ namespace Carpfish.Data.Migrations
                     IsFree = table.Column<bool>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
                     RatersCount = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    ApplicationUserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -306,7 +307,7 @@ namespace Carpfish.Data.Migrations
                 {
                     ItemId = table.Column<int>(nullable: false),
                     ImageId = table.Column<string>(nullable: false),
-                    IsMain = table.Column<bool>(nullable: false)
+                    IsMain = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -331,7 +332,7 @@ namespace Carpfish.Data.Migrations
                 {
                     LakeId = table.Column<int>(nullable: false),
                     ImageId = table.Column<string>(nullable: false),
-                    IsMain = table.Column<bool>(nullable: false)
+                    IsMain = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -365,7 +366,7 @@ namespace Carpfish.Data.Migrations
                     OwnerId = table.Column<string>(nullable: false),
                     LakeId = table.Column<int>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
-                    RatersCount = table.Column<int>(nullable: false)
+                    RatersCount = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -390,7 +391,7 @@ namespace Carpfish.Data.Migrations
                 {
                     TrophyId = table.Column<int>(nullable: false),
                     ImageId = table.Column<string>(nullable: false),
-                    IsMain = table.Column<bool>(nullable: false)
+                    IsMain = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {

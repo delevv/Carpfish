@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Carpfish.Data.Migrations
+﻿namespace Carpfish.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ChangeMappingTablesModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

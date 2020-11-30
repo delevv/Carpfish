@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mwCeiqjGkAGgij2zWZ3Zb91UAm5TAY//+QFHAGt0cpphs2oNSlZ1IzKUZxisbcTLabqGWz9lEpBtjBNBArsxWg==",
+  "dgSpecHash": "PRt/OSnRqPqk1hc0plHxkwsSxiA/hJqJwrRDGEmRXxYvJ7MN2Hsu6n1EEwCaIGaX8TaPTsGeHAgz7LpNpjoeIQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Carpfish\\Data\\Carpfish.Data.Common\\Carpfish.Data.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
