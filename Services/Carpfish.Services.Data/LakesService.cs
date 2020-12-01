@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Carpfish.Data.Common.Repositories;
     using Carpfish.Data.Models;
+    using Carpfish.Services.Mapping;
     using Carpfish.Web.ViewModels.Lakes;
 
     public class LakesService : ILakesService
@@ -39,6 +41,7 @@
                 WebsiteUrl = input.WebsiteUrl,
             };
 
+            // :TODO Validate Image
             var mainImgUrl = await this.cloudinaryService.UploadAsync(input.MainImage, input.MainImage.FileName);
 
             var mainImg = new Image()
@@ -80,9 +83,27 @@
             await this.lakeImagesRepository.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllAsync<T>()
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
-            throw new NotImplementedException();
+            return this.lakeRepository.AllAsNoTracking()
+                 .OrderByDescending(l => l.Id)
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
+                 .To<T>()
+                 .ToList();
+        }
+
+        public T GetById<T>(int id)
+        {
+            return this.lakeRepository.AllAsNoTracking()
+                .Where(l => l.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+        }
+
+        public int GetCount()
+        {
+            return this.lakeRepository.All().Count();
         }
     }
 }

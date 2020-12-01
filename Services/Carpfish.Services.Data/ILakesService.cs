@@ -7,8 +7,12 @@
 
     public interface ILakesService
     {
-        Task<IEnumerable<T>> GetAllAsync<T>();
+        IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
         Task AddAsync(AddLakeInputModel input, string userId);
+
+        T GetById<T>(int id);
+
+        int GetCount();
     }
 }

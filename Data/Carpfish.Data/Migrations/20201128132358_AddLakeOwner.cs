@@ -22,7 +22,7 @@
                 name: "OwnerId",
                 table: "Lakes",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lakes_OwnerId",

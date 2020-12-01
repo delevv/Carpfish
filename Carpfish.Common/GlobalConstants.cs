@@ -33,5 +33,8 @@
         public const double TrophyMaxWeight = 99.99;
 
         public const int TrophyBaitDescriptionMaxLength = 100;
+
+        // LakesController/All
+        public const int LakesCountPerPage = 6;
     }
 }

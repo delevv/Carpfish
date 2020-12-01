@@ -1,0 +1,27 @@
+﻿@model Carpfish.Web.ViewModels.Lakes.LakesListViewModel
+@{
+    this.ViewData["Title"] = "All Lakes, page " + Model.PageNumber;
+}
+
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+<div class="row">
+    @foreach (var lake in this.Model.Lakes)
+    {
+        <div class="card-deck col-md-4">
+            <div class="card mb-3">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <img src="@lake.ImgUrl" class="card-img-top embed-responsive-item" alt="@lake.Name image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@lake.Name</h5>
+                    <p class="card-text">@lake.CountryName</p>
+                    <p class="card-text">@lake.IsFree</p>
+                    <p class="card-text">@lake.Rating</p>
+                    <a href="" class="btn btn-primary stretched-link">More Info</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<partial name="_PagingPartial" model="@Model" />
