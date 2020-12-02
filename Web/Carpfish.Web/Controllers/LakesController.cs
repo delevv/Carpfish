@@ -76,5 +76,11 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            var lake = this.lakesService.GetById<LakeByIdViewModel>(id);
+            return this.View(lake);
+        }
     }
 }

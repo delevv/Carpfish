@@ -17,7 +17,7 @@
                     <p class="card-text">@lake.CountryName</p>
                     <p class="card-text">@lake.IsFree</p>
                     <p class="card-text">@lake.Rating</p>
-                    <a href="" class="btn btn-primary stretched-link">More Info</a>
+                    <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-primary stretched-link">More Info</a>
                 </div>
             </div>
         </div>
