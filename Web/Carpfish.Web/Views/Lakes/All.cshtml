@@ -3,6 +3,9 @@
     this.ViewData["Title"] = "All Lakes, page " + Model.PageNumber;
 }
 
+<div class="row justify-content-center">
+     <a asp-action="Add"><input class="btn btn-primary" value="Add Lake"/></a>
+</div>
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 <div class="row">
     @foreach (var lake in this.Model.Lakes)
