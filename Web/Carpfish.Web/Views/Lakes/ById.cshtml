@@ -20,102 +20,65 @@
             </div> <!-- Left right --> <a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a> <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a> <!-- Thumbnails -->
             <ol class="carousel-indicators list-inline">
                 <li class="list-inline-item active"> <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#custCarousel"> <img src="@Model.MainImg" class="img-fluid"> </a> </li>
-               @for (int i = 0; i < Model.OtherImages.Length; i++)
-               {
-                   <li class="list-inline-item"> <a id="carousel-selector-@(i+1)" data-slide-to="@(i+1)" data-target="#custCarousel"> <img src="@Model.OtherImages[i]" class="img-fluid"> </a> </li>
-               }
+                @for (int i = 0; i < Model.OtherImages.Length; i++)
+                {
+                    <li class="list-inline-item"> <a id="carousel-selector-@(i+1)" data-slide-to="@(i+1)" data-target="#custCarousel"> <img src="@Model.OtherImages[i]" class="img-fluid"> </a> </li>
+                }
             </ol>
         </div>
     </div>
     <!--right side-->
     <div class="col-md-4">
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
-        <p>4.1 average based on 254 reviews.</p>
-
+        <ul class="item-rating">
+            <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+            <li><span class="ml-2" id="averageVoteValue">@Model.Rating.AverageValue.ToString("0.0")</span><span> / 5</span></li>
+        </ul>
+        <p>Based on @Model.Rating.RatersCount reviews.</p>
         <hr>
 
         <div class="row mb-3 ml-2 mr-2">
-            <div class="side">
-                <div>5 star</div>
-            </div>
-            <div class="middle">
-                <div class="bar-container">
-                    <div class="bar-5"></div>
-                </div>
-            </div>
-            <div class="side right">
-                <div>123</div>
-            </div>
-            <div class="side">
-                <div>4 star</div>
-            </div>
-            <div class="middle">
-                <div class="bar-container">
-                    <div class="bar-4"></div>
-                </div>
-            </div>
-            <div class="side right">
-                <div>63</div>
-            </div>
-            <div class="side">
-                <div>3 star</div>
-            </div>
-            <div class="middle">
-                <div class="bar-container">
-                    <div class="bar-3"></div>
-                </div>
-            </div>
-            <div class="side right">
-                <div>15</div>
-            </div>
-            <div class="side">
-                <div>2 star</div>
-            </div>
-            <div class="middle">
-                <div class="bar-container">
-                    <div class="bar-2"></div>
-                </div>
-            </div>
-            <div class="side right">
-                <div>6</div>
-            </div>
-            <div class="side">
-                <div>1 star</div>
-            </div>
-            <div class="middle">
-                <div class="bar-container">
-                    <div class="bar-1"></div>
-                </div>
-            </div>
-            <div class="side right">
-                <div>20</div>
-            </div>
+            <div class="side"><div>5 star</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-5" style="width:@(Model.Rating.FiveStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.Rating.FiveStarRatersCount</div></div>
+            <div class="side"><div>4 star</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-4" style="width:@(Model.Rating.FourStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.Rating.FourStarRatersCount</div></div>
+            <div class="side"><div>3 star</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-3" style="width:@(Model.Rating.ThreeStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.Rating.ThreeStarRatersCount</div></div>
+            <div class="side"><div>2 star</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-2" style="width:@(Model.Rating.TwoStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.Rating.TwoStarRatersCount</div></div>
+            <div class="side"><div>1 star</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-1" style="width:@(Model.Rating.OneStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.Rating.OneStarRatersCount</div></div>
         </div>
+            
         <table class="table table-sm table-borderless mb-0">
             <tbody>
                 <tr>
                     <th class="pl-0 w-25" scope="row"><strong>Country</strong></th>
-                    <td>Bulgaria</td>
+                    <td>@Model.CountryName</td>
                 </tr>
                 <tr>
                     <th class="pl-0 w-25" scope="row"><strong>Area</strong></th>
-                    <td>222 &#13218;</td>
+                    <td>@Model.Area &#13218;</td>
                 </tr>
                 <tr>
                     <th class="pl-0 w-25" scope="row"><strong>AddedBy</strong></th>
-                    <td>Gosho</td>
+                    <td>@Model.OwnerUserName</td>
                 </tr>
                 <tr>
                     <th class="pl-0 w-25" scope="row"><strong>Coordinates</strong></th>
-                    <td>1231231.131231..2</td>
+                    <td>@Model.Coordinates</td>
                 </tr>
                 <tr>
                     <th class="pl-0 w-25" scope="row"><strong>Website</strong></th>
-                    <td>www.safasfa.com</td>
+                    <td>@Model.WebsiteUrl</td>
                 </tr>
             </tbody>
         </table>
@@ -182,6 +145,7 @@
     </div>
 </div>
 
+<form id="antiForgeryForm" method="post"></form>
 @section Scripts{
     <script>
         $('.carousel .carousel-item').each(function () {
@@ -202,5 +166,30 @@
             }
         });
 
+    </script>
+
+    <script>
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var lakeId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                console.log(antiForgeryToken);
+                var data = { lakeId: lakeId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
     </script>
 }

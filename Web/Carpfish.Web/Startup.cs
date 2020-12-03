@@ -56,6 +56,11 @@
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -69,6 +74,7 @@
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<ILakesService, LakesService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IVotesService, VotesService>();
 
             // External login providers
             // services.AddAuthentication()

@@ -19,6 +19,8 @@ namespace Carpfish.Data.Models
             this.Items = new HashSet<Item>();
             this.Lakes = new HashSet<Lake>();
             this.Trophies = new HashSet<Trophy>();
+            this.LakeVotes = new HashSet<LakeVote>();
+            this.TrophyVotes = new HashSet<TrophyVote>();
         }
 
         // Audit info
@@ -42,5 +44,9 @@ namespace Carpfish.Data.Models
         public virtual ICollection<Lake> Lakes { get; set; }
 
         public virtual ICollection<Trophy> Trophies { get; set; }
+
+        public virtual ICollection<LakeVote> LakeVotes { get; set; }
+
+        public virtual ICollection<TrophyVote> TrophyVotes { get; set; }
     }
 }

@@ -9,6 +9,8 @@
 
     public class LakeByIdViewModel : IMapFrom<Lake>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string OwnerUserName { get; set; }
@@ -23,13 +25,12 @@
 
         public string IsFree { get; set; }
 
-        public double Rating { get; set; }
-
-        public int RatersCount { get; set; }
-
         public string MainImg { get; set; }
 
         public string[] OtherImages { get; set; }
+
+        [IgnoreMap]
+        public LakeRatingViewModel Rating { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -1,0 +1,55 @@
+﻿namespace Carpfish.Web.Controllers
+{
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Carpfish.Services.Data;
+    using Carpfish.Web.ViewModels.Votes;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class VotesController : Controller
+    {
+        private readonly IVotesService votesService;
+
+        public VotesController(IVotesService votesService)
+        {
+            this.votesService = votesService;
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<PostLakeVoteResponseModel>> PostLakeVote(PostLakeVoteInputModel inputModel)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await this.votesService.SetLakeVoteAsync(inputModel.LakeId, userId, inputModel.Value);
+
+            return new PostLakeVoteResponseModel
+            {
+                AverageVote = this.votesService.GetLakeAverageVote(inputModel.LakeId),
+                RatersCount = this.votesService.GetLakeRatersCount(inputModel.LakeId),
+                OneStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 1),
+                TwoStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 2),
+                ThreeStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 3),
+                FourStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 4),
+                FiveStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 5),
+            };
+        }
+
+        //[HttpPost]
+        //[Authorize]
+        //public async Task<ActionResult<PostTrophyVoteResponseModel>> PostTrophyVote(PostTrophyVoteInputModel inputModel)
+        //{
+        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    await this.votesService.SetTrophyVoteAsync(inputModel.TrophyId, userId, inputModel.Value);
+
+        //    return new PostTrophyVoteResponseModel
+        //    {
+        //        AverageVote = this.votesService.GetLakeAverageVote(inputModel.TrophyId),
+        //        RatersCount = this.votesService.GetLakeRatersCount(inputModel.TrophyId),
+        //    };
+        //}
+    }
+}

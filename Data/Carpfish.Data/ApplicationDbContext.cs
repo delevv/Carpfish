@@ -42,6 +42,10 @@
 
         public DbSet<LakeImage> LakeImages { get; set; }
 
+        public DbSet<LakeVote> LakeVotes { get; set; }
+
+        public DbSet<TrophyVote> TrophyVotes { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

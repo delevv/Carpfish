@@ -12,6 +12,7 @@
         {
             this.Trophies = new HashSet<Trophy>();
             this.LakeImages = new HashSet<LakeImage>();
+            this.LakeVotes = new HashSet<LakeVote>();
         }
 
         [Required]
@@ -39,10 +40,8 @@
 
         public bool IsFree { get; set; }
 
-        public double Rating { get; set; }
-
-        public int RatersCount { get; set; }
-
         public virtual ICollection<Trophy> Trophies { get; set; }
+
+        public virtual ICollection<LakeVote> LakeVotes { get; set; }
     }
 }

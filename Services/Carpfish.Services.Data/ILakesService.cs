@@ -13,6 +13,8 @@
 
         T GetById<T>(int id);
 
+        LakeRatingViewModel GetRatingById(int id);
+
         int GetCount();
     }
 }

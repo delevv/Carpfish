@@ -1,6 +1,7 @@
 ﻿namespace Carpfish.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -79,8 +80,11 @@
 
         public IActionResult ById(int id)
         {
-            var lake = this.lakesService.GetById<LakeByIdViewModel>(id);
-            return this.View(lake);
+            var viewModel = this.lakesService.GetById<LakeByIdViewModel>(id);
+
+            viewModel.Rating = this.lakesService.GetRatingById(id);
+
+            return this.View(viewModel);
         }
     }
 }
