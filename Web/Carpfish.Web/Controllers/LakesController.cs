@@ -82,8 +82,6 @@
         {
             var viewModel = this.lakesService.GetById<LakeByIdViewModel>(id);
 
-            viewModel.Rating = this.lakesService.GetRatingById(id);
-
             return this.View(viewModel);
         }
     }

@@ -103,34 +103,5 @@
         {
             return this.lakeRepository.All().Count();
         }
-
-        public LakeRatingViewModel GetRatingById(int id)
-        {
-            var lake = this.lakeRepository.All()
-                .Where(l => l.Id == id)
-                .FirstOrDefault();
-
-            var lakeRating = new LakeRatingViewModel();
-
-            lakeRating.AverageValue = lake.LakeVotes.Any() ? lake.LakeVotes.Average(lv => lv.Vote.Value) : 0;
-            lakeRating.RatersCount = lake.LakeVotes.Any() ? lake.LakeVotes.Count() : 0;
-            lakeRating.OneStarRatersCount = this.GetStarRaterstCount(lake, 1);
-            lakeRating.TwoStarRatersCount = this.GetStarRaterstCount(lake, 2);
-            lakeRating.ThreeStarRatersCount = this.GetStarRaterstCount(lake, 3);
-            lakeRating.FourStarRatersCount = this.GetStarRaterstCount(lake, 4);
-            lakeRating.FiveStarRatersCount = this.GetStarRaterstCount(lake, 5);
-
-            return lakeRating;
-        }
-
-        private int GetStarRaterstCount(Lake lake, int voteValue)
-        {
-            if (lake.LakeVotes.Any(lv => lv.Vote.Value == voteValue))
-            {
-                return lake.LakeVotes.Where(lv => lv.Vote.Value == voteValue).Count();
-            }
-
-            return 0;
-        }
     }
 }

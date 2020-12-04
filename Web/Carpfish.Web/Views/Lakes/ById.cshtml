@@ -35,27 +35,27 @@
             <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
             <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
             <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-            <li><span class="ml-2" id="averageVoteValue">@Model.Rating.AverageValue.ToString("0.0")</span><span> / 5</span></li>
+            <li><span class="ml-2" id="averageVoteValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span></li>
         </ul>
-        <p>Based on @Model.Rating.RatersCount reviews.</p>
+        <p>Based on @Model.RatersCount reviews.</p>
         <hr>
 
         <div class="row mb-3 ml-2 mr-2">
             <div class="side"><div>5 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-5" style="width:@(Model.Rating.FiveStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.Rating.FiveStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-5" style="width:@(Model.FiveStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.FiveStarRatersCount</div></div>
             <div class="side"><div>4 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-4" style="width:@(Model.Rating.FourStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.Rating.FourStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-4" style="width:@(Model.FourStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.FourStarRatersCount</div></div>
             <div class="side"><div>3 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-3" style="width:@(Model.Rating.ThreeStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.Rating.ThreeStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-3" style="width:@(Model.ThreeStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.ThreeStarRatersCount</div></div>
             <div class="side"><div>2 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-2" style="width:@(Model.Rating.TwoStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.Rating.TwoStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-2" style="width:@(Model.TwoStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.TwoStarRatersCount</div></div>
             <div class="side"><div>1 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-1" style="width:@(Model.Rating.OneStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.Rating.OneStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-1" style="width:@(Model.OneStarBar + "%")"></div></div></div>
+            <div class="side right"><div>@Model.OneStarRatersCount</div></div>
         </div>
             
         <table class="table table-sm table-borderless mb-0">

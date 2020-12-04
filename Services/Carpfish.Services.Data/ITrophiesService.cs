@@ -3,16 +3,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Carpfish.Web.ViewModels.Lakes;
+    using Carpfish.Web.ViewModels.Trophies;
 
-    public interface ILakesService
+    public interface ITrophiesService
     {
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
-        Task AddAsync(AddLakeInputModel input, string userId);
+        Task AddAsync(AddTrophyInputModel input, string userId);
 
         T GetById<T>(int id);
-
-        int GetCount();
     }
 }

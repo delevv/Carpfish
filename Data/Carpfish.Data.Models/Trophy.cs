@@ -11,6 +11,7 @@
         public Trophy()
         {
             this.TrophyImages = new HashSet<TrophyImage>();
+            this.TrophyVotes = new HashSet<TrophyVote>();
         }
 
         public virtual ICollection<TrophyImage> TrophyImages { get; set; }
@@ -31,8 +32,6 @@
 
         public virtual Lake Lake { get; set; }
 
-        public double Rating { get; set; }
-
-        public int RatersCount { get; set; }
+        public virtual ICollection<TrophyVote> TrophyVotes { get; set; }
     }
 }

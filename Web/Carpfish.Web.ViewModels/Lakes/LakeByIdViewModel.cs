@@ -29,8 +29,32 @@
 
         public string[] OtherImages { get; set; }
 
-        [IgnoreMap]
-        public LakeRatingViewModel Rating { get; set; }
+        // [IgnoreMap]
+        // public LakeRatingViewModel Rating { get; set; }
+
+        public double AverageRating { get; set; }
+
+        public int RatersCount { get; set; }
+
+        public int OneStarRatersCount { get; set; }
+
+        public int OneStarBar => (this.OneStarRatersCount + 1) / (this.RatersCount + 1);
+
+        public int TwoStarRatersCount { get; set; }
+
+        public int TwoStarBar => (this.TwoStarRatersCount + 1) / (this.RatersCount + 1);
+
+        public int ThreeStarRatersCount { get; set; }
+
+        public int ThreeStarBar => (this.ThreeStarRatersCount + 1) / (this.RatersCount + 1);
+
+        public int FourStarRatersCount { get; set; }
+
+        public int FourStarBar => (this.FourStarRatersCount + 1) / (this.RatersCount + 1);
+
+        public int FiveStarRatersCount { get; set; }
+
+        public int FiveStarBar => (this.FiveStarRatersCount + 1) / (this.RatersCount + 1);
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -42,7 +66,21 @@
                .ForMember(x => x.IsFree, opt =>
                    opt.MapFrom(l => l.IsFree ? "Free" : "Paid"))
                .ForMember(x => x.OtherImages, opt =>
-                 opt.MapFrom(l => l.LakeImages.Where(i => !i.IsMain).Select(li => li.Image.Url)));
+                 opt.MapFrom(l => l.LakeImages.Where(i => !i.IsMain).Select(li => li.Image.Url)))
+               .ForMember(x => x.AverageRating, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Average(lv => lv.Vote.Value) : 0))
+               .ForMember(x => x.RatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Count()))
+               .ForMember(x => x.OneStarRatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Where(lv => lv.Vote.Value == 1).Count() : 0))
+                  .ForMember(x => x.TwoStarRatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Where(lv => lv.Vote.Value == 2).Count() : 0))
+                  .ForMember(x => x.ThreeStarRatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Where(lv => lv.Vote.Value == 3).Count() : 0))
+                  .ForMember(x => x.FourStarRatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Where(lv => lv.Vote.Value == 4).Count() : 0))
+                  .ForMember(x => x.FiveStarRatersCount, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Where(lv => lv.Vote.Value == 5).Count() : 0));
         }
     }
 }

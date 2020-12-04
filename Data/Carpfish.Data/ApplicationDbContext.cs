@@ -36,6 +36,8 @@
 
         public DbSet<Trophy> Trophies { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public DbSet<TrophyImage> TrophyImages { get; set; }
 
         public DbSet<ItemImage> ItemImages { get; set; }

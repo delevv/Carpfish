@@ -4,14 +4,16 @@ using Carpfish.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Carpfish.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201203074753_AddVotesForLakeAndTrophy")]
+    partial class AddVotesForLakeAndTrophy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -411,7 +413,7 @@ namespace Carpfish.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OwnerId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VoteId")
@@ -421,7 +423,7 @@ namespace Carpfish.Data.Migrations
 
                     b.HasIndex("LakeId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("VoteId");
 
@@ -557,20 +559,20 @@ namespace Carpfish.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("TrophyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VoteId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
-
                     b.HasIndex("TrophyId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("VoteId");
 
@@ -595,7 +597,7 @@ namespace Carpfish.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -791,9 +793,9 @@ namespace Carpfish.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Carpfish.Data.Models.ApplicationUser", "Owner")
+                    b.HasOne("Carpfish.Data.Models.ApplicationUser", "User")
                         .WithMany("LakeVotes")
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("UserId");
 
                     b.HasOne("Carpfish.Data.Models.Vote", "Vote")
                         .WithMany()
@@ -803,7 +805,7 @@ namespace Carpfish.Data.Migrations
 
                     b.Navigation("Lake");
 
-                    b.Navigation("Owner");
+                    b.Navigation("User");
 
                     b.Navigation("Vote");
                 });
@@ -846,15 +848,15 @@ namespace Carpfish.Data.Migrations
 
             modelBuilder.Entity("Carpfish.Data.Models.TrophyVote", b =>
                 {
-                    b.HasOne("Carpfish.Data.Models.ApplicationUser", "Owner")
-                        .WithMany("TrophyVotes")
-                        .HasForeignKey("OwnerId");
-
                     b.HasOne("Carpfish.Data.Models.Trophy", "Trophy")
                         .WithMany("TrophyVotes")
                         .HasForeignKey("TrophyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Carpfish.Data.Models.ApplicationUser", "User")
+                        .WithMany("TrophyVotes")
+                        .HasForeignKey("UserId");
 
                     b.HasOne("Carpfish.Data.Models.Vote", "Vote")
                         .WithMany()
@@ -862,9 +864,9 @@ namespace Carpfish.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Owner");
-
                     b.Navigation("Trophy");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vote");
                 });
