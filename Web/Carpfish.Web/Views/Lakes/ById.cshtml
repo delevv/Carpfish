@@ -28,36 +28,36 @@
         </div>
     </div>
     <!--right side-->
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         <ul class="item-rating">
-            <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-            <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-            <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-            <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-            <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-            <li><span class="ml-2" id="averageVoteValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span></li>
+            <li class="star" data-vote="1"><i class="fa fa-star"></i></li>
+            <li class="star" data-vote="2"><i class="fa fa-star"></i></li>
+            <li class="star" data-vote="3"><i class="fa fa-star"></i></li>
+            <li class="star" data-vote="4"><i class="fa fa-star"></i></li>
+            <li class="star" data-vote="5"><i class="fa fa-star"></i></li>
+            <li><span id="averageVoteValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span></li>
         </ul>
-        <p>Based on @Model.RatersCount reviews.</p>
+        <p id="ratersCount">Based on @Model.RatersCount reviews.</p>
         <hr>
 
         <div class="row mb-3 ml-2 mr-2">
             <div class="side"><div>5 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-5" style="width:@(Model.FiveStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.FiveStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-5"></div></div></div>
+            <div class="side right"><div id="ratersCount-5">@Model.FiveStarRatersCount</div></div>
             <div class="side"><div>4 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-4" style="width:@(Model.FourStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.FourStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-4"></div></div></div>
+            <div class="side right"><div id="ratersCount-4">@Model.FourStarRatersCount</div></div>
             <div class="side"><div>3 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-3" style="width:@(Model.ThreeStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.ThreeStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-3"></div></div></div>
+            <div class="side right"><div id="ratersCount-3">@Model.ThreeStarRatersCount</div></div>
             <div class="side"><div>2 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-2" style="width:@(Model.TwoStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.TwoStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-2"></div></div></div>
+            <div class="side right"><div id="ratersCount-2">@Model.TwoStarRatersCount</div></div>
             <div class="side"><div>1 star</div></div>
-            <div class="middle"><div class="bar-container"><div class="bar-1" style="width:@(Model.OneStarBar + "%")"></div></div></div>
-            <div class="side right"><div>@Model.OneStarRatersCount</div></div>
+            <div class="middle"><div class="bar-container"><div class="bar-1"></div></div></div>
+            <div class="side right"><div id="ratersCount-1">@Model.OneStarRatersCount</div></div>
         </div>
-            
+
         <table class="table table-sm table-borderless mb-0">
             <tbody>
                 <tr>
@@ -169,12 +169,57 @@
     </script>
 
     <script>
+        /*hover stars for curr rating*/
+        $('.item-rating li.star').each(function (e) {
+            if (+$(this).attr("data-vote") <= +$("#averageVoteValue").text()) {
+                $(this).addClass('hover');
+            }
+        });
+
+        /*fill bars*/
+        var oneStarRaters = @Model.OneStarRatersCount;
+        var twoStarRaters = @Model.TwoStarRatersCount;
+        var threeStarRaters = @Model.ThreeStarRatersCount;
+        var fourStarRaters = @Model.FourStarRatersCount;
+        var fiveStarRaters = @Model.FiveStarRatersCount;
+
+        $('.bar-1').width(`${oneStarRaters / @Model.RatersCount * 100}%`);
+        $('.bar-2').width(`${twoStarRaters / @Model.RatersCount * 100}%`);
+        $('.bar-3').width(`${threeStarRaters / @Model.RatersCount * 100}%`);
+        $('.bar-4').width(`${fourStarRaters / @Model.RatersCount * 100}%`);
+        $('.bar-5').width(`${fiveStarRaters / @Model.RatersCount * 100}%`);
+
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('.item-rating li.star').on('mouseover', function () {
+            var onStar = $(this).attr("data-vote"); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function (e) {
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function () {
+            $(this).parent().children('li.star').each(function (e) {
+                $(this).removeClass('hover');
+            });
+
+            $('.item-rating li.star').each(function (e) {
+                if (+$(this).attr("data-vote") <= +$("#averageVoteValue").text()) {
+                    $(this).addClass('hover');
+                }
+            });
+        });
+
         $("li[data-vote]").each(function (el) {
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
                 var lakeId = @Model.Id;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                console.log(antiForgeryToken);
                 var data = { lakeId: lakeId, value: value };
                 $.ajax({
                     type: "POST",
@@ -184,8 +229,24 @@
                         'X-CSRF-TOKEN': antiForgeryToken
                     },
                     success: function (data) {
-                        console.log(data);
-                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                        $('#averageVoteValue').html(data['averageVote'].toFixed(1));
+
+                        $('#ratersCount').html(`Based on ${data['ratersCount']} reviews.`);
+
+                        $('.bar-1').width(`${+data['oneStarRatersCount'] / +data['ratersCount'] * 100}%`);
+                        $('#ratersCount-1').html(data['oneStarRatersCount']);
+
+                        $('.bar-2').width(`${+data['twoStarRatersCount'] / +data['ratersCount'] * 100}%`);
+                        $('#ratersCount-2').html(data['twoStarRatersCount']);
+
+                        $('.bar-3').width(`${+data['threeStarRatersCount'] / +data['ratersCount'] * 100}%`);
+                        $('#ratersCount-3').html(data['threeStarRatersCount']);
+
+                        $('.bar-4').width(`${+data['fourStarRatersCount'] / +data['ratersCount'] * 100}%`);
+                        $('#ratersCount-4').html(data['fourStarRatersCount']);
+
+                        $('.bar-5').width(`${+data['fiveStarRatersCount'] / +data['ratersCount'] * 100}%`);
+                        $('#ratersCount-5').html(data['fiveStarRatersCount']);
                     },
                     contentType: 'application/json',
                 });

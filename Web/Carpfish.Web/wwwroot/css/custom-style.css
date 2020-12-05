@@ -1,4 +1,4 @@
-﻿x#custCarousel .carousel-indicators {
+﻿#custCarousel .carousel-indicators {
     position: static;
     margin-top: 20px
 }
@@ -24,9 +24,19 @@
     width: 80%;
 }
 
-.clicked {
+/*.clicked {
     color: yellow;
+}*/
+/* Hover state of the stars */
+.item-rating > li.star-fill.hover > i.fa {
+    color: #FFCC36;
 }
+
+/* Selected state of the stars */
+.item-rating > li.star-fill.selected > i.fa {
+    color: #FF912C;
+}
+
 
 * {
     box-sizing: border-box;
@@ -42,15 +52,16 @@
     font-size: 25px;
 }
 */
-.checked {
+/*.checked {
     color: orange;
-}
+}*/
 
 /* Three column layout */
 .side {
     float: left;
     width: 15%;
     margin-top: 10px;
+    text-align: center;
 }
 
 .middle {
@@ -61,7 +72,7 @@
 
 /* Place text to the right */
 .right {
-    text-align: right;
+    text-align: center;
 }
 
 /* Clear floats after the columns */
@@ -81,7 +92,7 @@
 
 /* Individual bars */
 .bar-5 {
-   /* width: 60%;*/
+    /* width: 60%;*/
     height: 18px;
     background-color: #4CAF50;
 }
@@ -99,13 +110,13 @@
 }
 
 .bar-2 {
-/*    width: 4%;*/
+    /*    width: 4%;*/
     height: 18px;
     background-color: #ff9800;
 }
 
 .bar-1 {
-   /* width: 15%;*/
+    /* width: 15%;*/
     height: 18px;
     background-color: #f44336;
 }
@@ -145,13 +156,36 @@
     transform: translateX(0);
 }
 
-.item-rating li {
-    display: inline-block;
-    font-size: 18px;
-}
-
 @media (max-width: 767px) {
-    .item-rating li {
-        margin-top: 25px;
+    .item-rating {
+        margin-top: 30px;
     }
 }
+
+/* Rating Star Widgets Style */
+.item-rating {
+    list-style-type: none;
+    padding: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.item-rating > li.star {
+    display: inline-block;
+}
+
+/* Idle State of the stars */
+.item-rating > li.star > i.fa {
+    font-size: 18px; /* Change the size of the stars */
+    color: #ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.item-rating > li.star.hover > i.fa {
+    color: #FFCC36;
+}
+
+/* Selected state of the stars */
+.item-rating > li.star.selected > i.fa {
+    color: #FF912C;
+}       

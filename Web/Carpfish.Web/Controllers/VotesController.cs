@@ -30,11 +30,11 @@
             {
                 AverageVote = this.votesService.GetLakeAverageVote(inputModel.LakeId),
                 RatersCount = this.votesService.GetLakeRatersCount(inputModel.LakeId),
-                OneStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 1),
-                TwoStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 2),
-                ThreeStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 3),
-                FourStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 4),
-                FiveStarReatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 5),
+                OneStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 1),
+                TwoStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 2),
+                ThreeStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 3),
+                FourStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 4),
+                FiveStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 5),
             };
         }
 

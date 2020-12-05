@@ -104,7 +104,8 @@
             }
             else
             {
-                lakeVote.Vote.Value = value;
+                var vote = this.votesRepository.All().Where(v => v.Id == lakeVote.VoteId).FirstOrDefault();
+                vote.Value = value;
             }
 
             await this.votesRepository.SaveChangesAsync();
