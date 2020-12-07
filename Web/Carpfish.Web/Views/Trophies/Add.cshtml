@@ -1,0 +1,62 @@
+﻿@model Carpfish.Web.ViewModels.Trophies.AddTrophyInputModel
+@{
+    this.ViewData["Title"] = "Add new Trophy";
+    var lakesItems = this.Model.LakesItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BaitDescription"></label>
+        <input asp-for="BaitDescription" class="form-control"></input>
+        <span asp-validation-for="BaitDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LakeId"></label>
+        <select asp-for="LakeId" asp-items="lakesItems" class="form-control"></select>
+        <span asp-validation-for="LakeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MainImage"></label>
+        <div class="custom-file">
+            <input asp-for="MainImage" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose File...</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="OtherImages"></label>
+        <div class="custom-file">
+            <input multiple asp-for="OtherImages" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose Files...</label>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary" value="Add Trophy" />
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

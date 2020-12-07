@@ -14,8 +14,6 @@
             this.TrophyVotes = new HashSet<TrophyVote>();
         }
 
-        public virtual ICollection<TrophyImage> TrophyImages { get; set; }
-
         [Range(GlobalConstants.TrophyMinWieght, GlobalConstants.TrophyMaxWeight)]
         public double Weight { get; set; }
 
@@ -31,6 +29,8 @@
         public int LakeId { get; set; }
 
         public virtual Lake Lake { get; set; }
+
+        public virtual ICollection<TrophyImage> TrophyImages { get; set; }
 
         public virtual ICollection<TrophyVote> TrophyVotes { get; set; }
     }

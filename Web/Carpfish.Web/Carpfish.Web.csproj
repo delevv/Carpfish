@@ -37,8 +37,4 @@
     <ProjectReference Include="..\Carpfish.Web.Infrastructure\Carpfish.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Carpfish.Web.ViewModels\Carpfish.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Trophies\" />
-  </ItemGroup>
 </Project>
