@@ -11,18 +11,15 @@
         private readonly IRepository<LakeVote> lakeVotesRepository;
         private readonly IRepository<TrophyVote> trophyVotesRepository;
         private readonly IRepository<Vote> votesRepository;
-        private readonly IDeletableEntityRepository<Lake> lakeRepository;
 
         public VotesService(
             IRepository<LakeVote> lakeVotesRepository,
             IRepository<TrophyVote> trophyVotesRepository,
-            IRepository<Vote> votesRepository,
-            IDeletableEntityRepository<Lake> lakeRepository)
+            IRepository<Vote> votesRepository)
         {
             this.lakeVotesRepository = lakeVotesRepository;
             this.trophyVotesRepository = trophyVotesRepository;
             this.votesRepository = votesRepository;
-            this.lakeRepository = lakeRepository;
         }
 
         public double GetLakeAverageVote(int lakeId)

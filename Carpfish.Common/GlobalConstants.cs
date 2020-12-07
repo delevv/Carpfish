@@ -36,5 +36,8 @@
 
         // LakesController/All
         public const int LakesCountPerPage = 6;
+
+        // TrophiesController/All
+        public const int TrophiesCountPerPage = 6;
     }
 }

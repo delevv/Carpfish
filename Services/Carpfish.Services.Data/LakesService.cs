@@ -39,7 +39,7 @@
                 WebsiteUrl = input.WebsiteUrl,
             };
 
-            // :TODO Validate Image
+            // TODO: Validate Image
             var mainImgUrl = await this.cloudinaryService.UploadAsync(input.MainImage, input.MainImage.FileName);
 
             var mainImg = new Image()
@@ -89,6 +89,20 @@
                  .Take(itemsPerPage)
                  .To<T>()
                  .ToList();
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            return this.lakeRepository
+                .AllAsNoTracking()
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                })
+                .OrderBy(x => x.Name)
+                .ToList()
+                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
 
         public T GetById<T>(int id)

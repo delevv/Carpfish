@@ -14,5 +14,7 @@
         T GetById<T>(int id);
 
         int GetCount();
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }
