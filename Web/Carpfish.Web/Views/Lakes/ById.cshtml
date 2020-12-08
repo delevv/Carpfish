@@ -248,6 +248,10 @@
                         $('.bar-5').width(`${+data['fiveStarRatersCount'] / +data['ratersCount'] * 100}%`);
                         $('#ratersCount-5').html(data['fiveStarRatersCount']);
                     },
+                    error: function (error) {
+                        if (error.status == 401)
+                            window.location = "/Identity/Account/Login";
+                    },
                     contentType: 'application/json',
                 });
             })
