@@ -1,6 +1,5 @@
 ﻿namespace Carpfish.Web.ViewModels.Trophies
 {
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
@@ -11,8 +10,6 @@
     public class TrophyInListViewModel : IMapFrom<Trophy>, IHaveCustomMappings
     {
         public double Weight { get; set; }
-
-        public string BaitDescription { get; set; }
 
         public string OwnerId { get; set; }
 

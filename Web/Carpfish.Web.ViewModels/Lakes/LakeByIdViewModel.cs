@@ -1,10 +1,13 @@
 ﻿namespace Carpfish.Web.ViewModels.Lakes
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
     using AutoMapper;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
+    using Carpfish.Web.ViewModels.Trophies;
 
     public class LakeByIdViewModel : IMapFrom<Lake>, IHaveCustomMappings
     {
@@ -27,6 +30,8 @@
         public string MainImg { get; set; }
 
         public string[] OtherImages { get; set; }
+
+        public IEnumerable<TrophyInListViewModel> Trophies { get; set; }
 
         public double AverageRating { get; set; }
 
