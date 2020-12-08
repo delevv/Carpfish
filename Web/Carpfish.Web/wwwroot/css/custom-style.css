@@ -1,61 +1,9 @@
-﻿#custCarousel .carousel-indicators {
-    position: static;
-    margin-top: 20px
-}
-
-#custCarousel .carousel-indicators > li {
-    width: 100px
-}
-
-#custCarousel .carousel-indicators li img {
-    display: block;
-    opacity: 0.5
-}
-
-#custCarousel .carousel-indicators li.active img {
-    opacity: 1
-}
-
-#custCarousel .carousel-indicators li:hover img {
-    opacity: 0.75
-}
-
-.carousel-item img {
-    width: 80%;
-}
-
-/*.clicked {
-    color: yellow;
-}*/
-/* Hover state of the stars */
-.item-rating > li.star-fill.hover > i.fa {
-    color: #FFCC36;
-}
-
-/* Selected state of the stars */
-.item-rating > li.star-fill.selected > i.fa {
-    color: #FF912C;
-}
-
-
-* {
-    box-sizing: border-box;
-}
-
-
-.heading {
-    /*font-size: 25px;*/
+﻿.heading {
+    font-size: 25px;
     margin-right: 25px;
 }
 
-/*.fa {
-    font-size: 25px;
-}
-*/
-/*.checked {
-    color: orange;
-}*/
-
+/*-------------------- Rating ------------------*/
 /* Three column layout */
 .side {
     float: left;
@@ -121,45 +69,19 @@
     background-color: #f44336;
 }
 
-@media (max-width: 768px) {
-    .carousel-inner .carousel-item > div {
-        display: none;
-    }
-
-        .carousel-inner .carousel-item > div:first-child {
-            display: block;
-        }
-}
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-    display: flex;
-}
-
-/* display 3 */
-@media (min-width: 768px) {
-
-    .carousel-inner .carousel-item-right.active,
-    .carousel-inner .carousel-item-next {
-        transform: translateX(33.333%);
-    }
-
-    .carousel-inner .carousel-item-left.active,
-    .carousel-inner .carousel-item-prev {
-        transform: translateX(-33.333%);
-    }
-}
-
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left {
-    transform: translateX(0);
-}
-
 @media (max-width: 767px) {
     .item-rating {
         margin-top: 30px;
     }
+}
+/* Hover state of the stars */
+.item-rating > li.star-fill.hover > i.fa {
+    color: #FFCC36;
+}
+
+/* Selected state of the stars */
+.item-rating > li.star-fill.selected > i.fa {
+    color: #FF912C;
 }
 
 /* Rating Star Widgets Style */
@@ -170,22 +92,125 @@
     -webkit-user-select: none;
 }
 
-.item-rating > li.star {
-    display: inline-block;
+    .item-rating > li.star {
+        display: inline-block;
+    }
+
+        /* Idle State of the stars */
+        .item-rating > li.star > i.fa {
+            font-size: 18px; /* Change the size of the stars */
+            color: #ccc; /* Color on idle state */
+        }
+
+        /* Hover state of the stars */
+        .item-rating > li.star.hover > i.fa {
+            color: #FFCC36;
+        }
+
+        /* Selected state of the stars */
+        .item-rating > li.star.selected > i.fa {
+            color: #FF912C;
+        }
+
+/* ------------------- Carousel-Lake ------------------- */
+#custCarousel .carousel-inner > .carousel-item > img,
+#custCarousel .carousel-inner > .carousel-item > img {
+    display: flex;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    max-height: 500px;
 }
 
-/* Idle State of the stars */
-.item-rating > li.star > i.fa {
-    font-size: 18px; /* Change the size of the stars */
-    color: #ccc; /* Color on idle state */
+@media (max-width: 767px) {
+    #custCarousel .carousel-inner > .carousel-item > img {
+        max-height: 250px;
+    }
 }
 
-/* Hover state of the stars */
-.item-rating > li.star.hover > i.fa {
-    color: #FFCC36;
+#custCarousel .carousel-indicators {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 15;
+    margin: 0;
+    padding: 0 25px 25px 0;
+    text-align: right;
 }
 
-/* Selected state of the stars */
-.item-rating > li.star.selected > i.fa {
-    color: #FF912C;
+#custCarousel .carousel-control.left,
+#custCarousel .carousel-control.right {
+    background-image: none;
+}
+
+#custCarousel .carousel-inner .carousel-item.active,
+#custCarousel .carousel-inner .carousel-item-next,
+#custCarousel .carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* ------------------- Carousel-Trophy ------------------- */
+#carousel-trophy .carousel-inner > .carousel-item > img,
+#carousel-trophy .carousel-inner > .carousel-item > div > img {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+}
+
+@media (max-width: 767px) {
+    #carousel-trophy-lake .carousel-inner .carousel-item > div {
+        display: none;
+    }
+}
+
+#carousel-trophy .carousel-inner {
+    border-radius: 15px;
+}
+
+#carousel-trophy .carousel-caption {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    padding: 0 0 10px 25px;
+    color: #fff;
+    text-align: left;
+}
+
+#carousel-trophy .carousel-indicators {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 15;
+    margin: 0;
+    padding: 0 25px 25px 0;
+    text-align: right;
+}
+
+#carousel-trophy .carousel-control.left,
+#carousel-trophy .carousel-control.right {
+    background-image: none;
+}
+
+/*------------ Carousel Trophy-Lake -----------------*/
+@media (max-width: 767px) {
+    #carousel-trophy-lake .carousel-inner .carousel-item > div {
+        display: none;
+    }
+
+        #carousel-trophy-lake .carousel-inner .carousel-item > div:first-child {
+            display: block;
+        }
+}
+
+#carousel-trophy-lake .carousel-inner .carousel-item.active,
+#carousel-trophy-lake .carousel-inner .carousel-item-next,
+#carousel-trophy-lake .carousel-inner .carousel-item-prev {
+    display: flex;
 }

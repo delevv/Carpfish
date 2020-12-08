@@ -82,7 +82,10 @@
 
         public T GetById<T>(int id)
         {
-            throw new System.NotImplementedException();
+            return this.trophiesRepository.All()
+                 .Where(t => t.Id == id)
+                 .To<T>()
+                 .FirstOrDefault();
         }
     }
 }

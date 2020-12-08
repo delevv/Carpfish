@@ -14,7 +14,8 @@
         <div class="card mb-3 col-sm-6">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <img src="@trophy.MainImageUrl" class="card-img" alt="trophy main image">
+                    <img src="@trophy.MainImage" class="card-img" alt="trophy main image">
+                    <a asp-controller="Trophies" asp-action="ById" asp-route-id="@trophy.Id" class="stretched-link"></a>
                 </div>
                 <div class="col-md-6">
                     <div class="card-body flex-fill">

@@ -73,5 +73,11 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            var viewModel = this.trophiesService.GetById<TrophyByIdViewModel>(id);
+            return this.View(viewModel);
+        }
     }
 }

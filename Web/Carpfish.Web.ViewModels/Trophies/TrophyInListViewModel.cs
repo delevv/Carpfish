@@ -9,6 +9,8 @@
 
     public class TrophyInListViewModel : IMapFrom<Trophy>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public double Weight { get; set; }
 
         public string OwnerId { get; set; }
@@ -19,16 +21,13 @@
 
         public string LakeName { get; set; }
 
-        public string MainImageUrl { get; set; }
-
-        [NotMapped]
-        public double AverageVote { get; set; }
+        public string MainImage { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trophy, TrophyInListViewModel>()
-                .ForMember(x => x.MainImageUrl, opt =>
-                opt.MapFrom(l => l.TrophyImages
+                .ForMember(x => x.MainImage, opt =>
+                opt.MapFrom(t => t.TrophyImages
                                     .FirstOrDefault(ti => ti.IsMain)
                                     .Image.Url));
         }

@@ -90,7 +90,7 @@
     <div class="row justify-content-center my-3">
         <h2 class="font-weight-light">Trophies</h2>
         <div class="row mx-auto my-auto">
-            <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div id="carousel-trophy-lake" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     @{
                         var trophyCount = 0;
@@ -100,8 +100,9 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
+                                            <a asp-controller="Trophies" asp-action="ById" asp-route-id="@trophy.Id" class="stretched-link"></a>
                                             <div>
-                                                <img class="img-fluid w-auto" src="@trophy.MainImageUrl">
+                                                <img class="img-fluid w-auto" src="@trophy.MainImage">
                                             </div>
                                             <div class="row mt-3">
                                                 <span class="col-5">
@@ -122,11 +123,11 @@
                         }
                     }
                 </div>
-                <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                <a class="carousel-control-prev w-auto" href="#carousel-trophy-lake" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next w-auto" href="#carousel-trophy-lake" role="button" data-slide="next">
                     <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
