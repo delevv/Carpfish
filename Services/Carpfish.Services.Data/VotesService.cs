@@ -53,7 +53,7 @@
             }
 
             return this.lakeVotesRepository.All()
-                .Where(lv => lv.Vote.Value == value)
+                .Where(lv => lv.Vote.Value == value && lv.LakeId == lakeId)
                 .Count();
         }
 

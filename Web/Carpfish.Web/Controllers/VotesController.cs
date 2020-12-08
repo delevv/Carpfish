@@ -26,6 +26,17 @@
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.votesService.SetLakeVoteAsync(inputModel.LakeId, userId, inputModel.Value);
 
+            var postLakeVote = new PostLakeVoteResponseModel
+            {
+                AverageVote = this.votesService.GetLakeAverageVote(inputModel.LakeId),
+                RatersCount = this.votesService.GetLakeRatersCount(inputModel.LakeId),
+                OneStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 1),
+                TwoStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 2),
+                ThreeStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 3),
+                FourStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 4),
+                FiveStarRatersCount = this.votesService.GetLakeRatersCountByValue(inputModel.LakeId, 5),
+            };
+
             return new PostLakeVoteResponseModel
             {
                 AverageVote = this.votesService.GetLakeAverageVote(inputModel.LakeId),
