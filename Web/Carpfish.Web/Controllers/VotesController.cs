@@ -21,6 +21,7 @@
 
         [HttpPost]
         [Authorize]
+        [Route("[action]")]
         public async Task<ActionResult<PostLakeVoteResponseModel>> PostLakeVote(PostLakeVoteInputModel inputModel)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

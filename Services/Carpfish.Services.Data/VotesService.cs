@@ -84,19 +84,16 @@
 
             if (lakeVote == null)
             {
-                var vote = new Vote
-                {
-                    Value = value,
-                };
-
                 lakeVote = new LakeVote
                 {
                     LakeId = lakeId,
                     OwnerId = userId,
-                    Vote = vote,
+                    Vote = new Vote
+                    {
+                        Value = value,
+                    },
                 };
 
-                await this.votesRepository.AddAsync(vote);
                 await this.lakeVotesRepository.AddAsync(lakeVote);
             }
             else

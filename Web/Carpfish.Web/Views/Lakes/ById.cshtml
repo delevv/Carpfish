@@ -214,7 +214,7 @@
                 var data = { lakeId: lakeId, value: value };
                 $.ajax({
                     type: "POST",
-                    url: "/api/Votes",
+                    url: "/api/Votes/PostLakeVote",
                     data: JSON.stringify(data),
                     headers: {
                         'X-CSRF-TOKEN': antiForgeryToken
