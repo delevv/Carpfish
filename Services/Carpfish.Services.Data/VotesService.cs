@@ -116,26 +116,28 @@
 
             if (trophyVote == null)
             {
-                var vote = new Vote
-                {
-                    Value = value,
-                };
-
                 trophyVote = new TrophyVote
                 {
                     TrophyId = trophyId,
                     OwnerId = userId,
-                    Vote = vote,
+                    Vote = new Vote
+                    {
+                        Value = value,
+                    },
                 };
 
-                await this.votesRepository.AddAsync(vote);
                 await this.trophyVotesRepository.AddAsync(trophyVote);
             }
             else
             {
-                trophyVote.Vote.Value = value;
+                var vote = this.votesRepository.All()
+                    .Where(v => v.Id == trophyVote.VoteId)
+                    .FirstOrDefault();
+
+                vote.Value = value;
             }
 
+            await this.votesRepository.SaveChangesAsync();
             await this.trophyVotesRepository.SaveChangesAsync();
         }
     }

@@ -1,5 +1,5 @@
 ﻿@model Carpfish.Web.ViewModels.Trophies.TrophyByIdViewModel
-<!--Carousel Wrapper-->
+        <!--Carousel Wrapper-->
 <div id="carousel-trophy" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
     <!--Indicators-->
     <ol class="carousel-indicators">
@@ -42,16 +42,100 @@
 </div>
 <!--/.Carousel Wrapper-->
 
+<div class="text-center mt-3">
+    <ul id="trophy-rating" class="item-rating list-inline">
+        <li class="star list-inline-item mr-0" data-vote="1"><i class="fa fa-star"></i></li>
+        <li class="star list-inline-item mr-0" data-vote="2"><i class="fa fa-star"></i></li>
+        <li class="star list-inline-item mr-0" data-vote="3"><i class="fa fa-star"></i></li>
+        <li class="star list-inline-item mr-0" data-vote="4"><i class="fa fa-star"></i></li>
+        <li class="star list-inline-item mr-0" data-vote="5"><i class="fa fa-star"></i></li>
+        <li class="ml-2 list-inline-item"><span id="averageVoteValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span></li>
+        <li class="ml-2 list-inline-item">
+            <p id="ratersCount">Based on @Model.RatersCount reviews.</p>
+        </li>
+    </ul>
+</div>
+
 <div class="row text-center">
-    <div class="d-inline-flex">
-        <ul class="item-rating mr-2 text-left">
-            <li class="star" data-vote="1"><i class="fa fa-star"></i></li>
-            <li class="star" data-vote="2"><i class="fa fa-star"></i></li>
-            <li class="star" data-vote="3"><i class="fa fa-star"></i></li>
-            <li class="star" data-vote="4"><i class="fa fa-star"></i></li>
-            <li class="star" data-vote="5"><i class="fa fa-star"></i></li>
-            <li><span id="averageVoteValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span></li>
-        </ul>
-        <p class="float-right">Based on @Model.RatersCount reviews.</p>
+    <div id="trophy-info-label" class="col-sm">
+        <i class="fas fa-weight-hanging text-info"></i>
+        <span class="ml-2">@Model.Weight.ToString("f3") kg</span>
+    </div>
+    <div id="trophy-info-label" class="col-sm">
+        <i class="fas fa-water text-success"></i>
+        <a class="ml-2"
+           asp-controller="Lakes"
+           asp-action="ById"
+           asp-route-id="@Model.LakeId">@Model.LakeName</a>
+    </div>
+    <div id="trophy-info-label" class="col-sm">
+        <i class="fas fa-user text-info"></i>
+        <span class="ml-2">@Model.OwnerUserName</span>
     </div>
 </div>
+
+<form id="antiForgeryForm" method="post"></form>
+
+@section Scripts{
+    <script>
+        /*hover stars for curr rating*/
+        $('.item-rating li.star').each(function (e) {
+            if (+$(this).attr("data-vote") <= +$("#averageVoteValue").text()) {
+                $(this).addClass('hover');
+            }
+        });
+
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('.item-rating li.star').on('mouseover', function () {
+            var onStar = $(this).attr("data-vote"); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function (e) {
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function () {
+            $(this).parent().children('li.star').each(function (e) {
+                $(this).removeClass('hover');
+            });
+
+            $('.item-rating li.star').each(function (e) {
+                if (+$(this).attr("data-vote") <= +$("#averageVoteValue").text()) {
+                    $(this).addClass('hover');
+                }
+            });
+        });
+
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var trophyId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { trophyId: trophyId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes/PostTrophyVote",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data['averageVote'].toFixed(1));
+
+                        $('#ratersCount').html(`Based on ${data['ratersCount']} reviews.`);
+                    },
+                    error: function (error) {
+                        if (error.status == 401)
+                            window.location = "/Identity/Account/Login";
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+}
