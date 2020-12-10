@@ -30,6 +30,10 @@
 
         public virtual Lake Lake { get; set; }
 
+        public int? RigId { get; set; }
+
+        public virtual Rig Rig { get; set; }
+
         public virtual ICollection<TrophyImage> TrophyImages { get; set; }
 
         public virtual ICollection<TrophyVote> TrophyVotes { get; set; }

@@ -34,6 +34,24 @@
 
         public const int TrophyBaitDescriptionMaxLength = 100;
 
+        // Rig
+        public const int RigNameMaxLength = 50;
+        public const int RigDescriptionMaxLength = 500;
+
+        // Step
+        public const int StepDescriptionMaxLength = 2000;
+        public const int StepNumberMinValue = 1;
+        public const int StepNumberMaxValue = int.MaxValue;
+        public const int StepRigIdMinValue = 1;
+        public const int StepRigIdMaxValue = int.MaxValue;
+
+        // Material
+        public const int MaterialDescriptionMaxLength = 50;
+        public const int MaterialNumberMinValue = 1;
+        public const int MaterialNumberMaxValue = int.MaxValue;
+        public const int MaterialRigIdMinValue = 1;
+        public const int MaterialRigIdMaxValue = int.MaxValue;
+
         // LakesController/All
         public const int LakesCountPerPage = 6;
 

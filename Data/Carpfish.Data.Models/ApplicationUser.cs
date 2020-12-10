@@ -21,6 +21,7 @@ namespace Carpfish.Data.Models
             this.Trophies = new HashSet<Trophy>();
             this.LakeVotes = new HashSet<LakeVote>();
             this.TrophyVotes = new HashSet<TrophyVote>();
+            this.Rigs = new HashSet<Rig>();
         }
 
         // Audit info
@@ -48,5 +49,7 @@ namespace Carpfish.Data.Models
         public virtual ICollection<LakeVote> LakeVotes { get; set; }
 
         public virtual ICollection<TrophyVote> TrophyVotes { get; set; }
+
+        public virtual ICollection<Rig> Rigs { get; set; }
     }
 }
