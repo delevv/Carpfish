@@ -76,6 +76,7 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<ITrophiesService, TrophiesService>();
+            services.AddTransient<IRigsService, RigsService>();
 
             // External login providers
             // services.AddAuthentication()

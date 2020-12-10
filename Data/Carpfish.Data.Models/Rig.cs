@@ -29,7 +29,7 @@
         public virtual ApplicationUser Owner { get; set; }
 
         [Required]
-        public string ImgUrl { get; set; }
+        public Image Image { get; set; }
 
         public virtual ICollection<Material> Materials { get; set; }
 

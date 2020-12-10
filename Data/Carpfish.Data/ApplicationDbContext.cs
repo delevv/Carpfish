@@ -38,6 +38,12 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Rig> Rigs { get; set; }
+
+        public DbSet<Step> Steps { get; set; }
+
+        public DbSet<Material> Materials { get; set; }
+
         public DbSet<TrophyImage> TrophyImages { get; set; }
 
         public DbSet<ItemImage> ItemImages { get; set; }

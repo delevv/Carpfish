@@ -1,25 +1,22 @@
-﻿namespace Carpfish.Data.Models
+﻿namespace Carpfish.Web.ViewModels.Steps
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Carpfish.Common;
-    using Carpfish.Data.Common.Models;
+    using Microsoft.AspNetCore.Http;
 
-    public class Step : BaseModel<int>
+    public class AddStepInputModel
     {
         [Range(GlobalConstants.StepNumberMinValue, GlobalConstants.StepNumberMaxValue)]
         public int StepNumber { get; set; }
 
         [Required]
-        public Image Image { get; set; }
+        [Display(Name = "Select step image")]
+        public IFormFile Image { get; set; }
 
         [Required]
         [MaxLength(GlobalConstants.StepDescriptionMaxLength)]
         public string Description { get; set; }
-
-        [Range(GlobalConstants.StepRigIdMinValue, GlobalConstants.StepRigIdMaxValue)]
-        public int RigId { get; set; }
-
-        public virtual Rig Rig { get; set; }
     }
 }
