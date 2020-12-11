@@ -1,0 +1,210 @@
+﻿@model Carpfish.Web.ViewModels.Rigs.AddRigInputModel
+@{
+}
+
+<form method="post" class="col-md-8 offset-md-2">
+    <!------------------ Rig Main Info --------------------->
+    <h2 class="text-center">Rig main info</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-sm">
+            <img id="rig-img" class="img-fluid" src="https://res.cloudinary.com/dlx1dwguj/image/upload/v1607668086/default-placeholder_pohpbi.png" alt="default rig img" />
+            <div class="custom-file mt-3">
+                <input id="rig-img-input" asp-for="Image" class="form-control custom-file-input" />
+                <label asp-for="Image" class="custom-file-label"></label>
+            </div>
+        </div>
+        <div class="col-sm text-center">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea id="rig-text-area" asp-for="Description" class="form-control" rows="9"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <!------------------ Rig Main Info --------------------->
+    <!------------------ Rig Materials --------------------->
+    <h2 class="text-center mt-3">Rig materials</h2>
+    <hr />
+
+    <div class="text-center">
+        <div id="materialsContainer" class="row"></div>
+        <a id="materialsBtn" class="btn btn-success mt-2">Add Material</a>
+    </div>
+    <!------------------ Rig Materials --------------------->
+    <!------------------ Rig Steps --------------------->
+    <h2 class="text-center mt-3">Rig Steps</h2>
+    <hr />
+
+    <div>
+        <div id="stepsContainer"></div>
+        <div class="text-center">
+            <a id="stepsBtn" class="btn btn-success mt-2">Add Step</a>
+        </div>
+    </div>
+    <!------------------ Rig Steps --------------------->
+    <div class="text-right">
+        <input type="submit" class="btn btn-primary btn-lg" value="Submit Rig" />
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //add picture preview
+            $("#rig-img-input").change(function (e) {
+                $("#rig-img")[0].src = window.URL.createObjectURL(e.target.files[0]);
+            });
+
+            //add file name for label
+            $(".custom-file-input").on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+
+                fileLabel.html(files[0].name);
+            });
+
+            //append input field for material
+            var materialsCounter = 0;
+            $("#materialsBtn").on("click", function () {
+                var materialDiv = document.createElement("div");
+                materialDiv.classList.add("col-md-8");
+                materialDiv.classList.add("mt-2");
+                materialDiv.classList.add("offset-md-2");
+                materialDiv.classList.add("input-group");
+
+                var numberDiv = document.createElement("div");
+                numberDiv.classList.add("input-group-prepend");
+
+                var span = document.createElement("span");
+                span.classList.add("input-group-text");
+                span.textContent = materialsCounter + 1;
+                span.id = `material${materialsCounter}`;
+
+                numberDiv.appendChild(span);
+                materialDiv.appendChild(numberDiv);
+
+                var materialInput = document.createElement('input');
+                materialInput.type = "text";
+                materialInput.setAttribute("aria-describedby", `material${materialsCounter}`);
+                materialInput.name = `Materials[${materialsCounter++}].Description`;
+                materialInput.classList.add("form-control");
+
+                materialDiv.appendChild(materialInput);
+
+                var delBtn = document.createElement('btn');
+                delBtn.classList.add("btn");
+                delBtn.classList.add("btn-danger");
+                delBtn.textContent = "X";
+
+                delBtn.addEventListener("click", function () {
+                    this.parentNode.remove();
+                });
+
+                materialDiv.appendChild(delBtn);
+
+                $("#materialsContainer").append(materialDiv);
+            });
+
+            //append step
+            var stepsCounter = 0;
+            $("#stepsBtn").on("click", function () {
+                var stepDiv = document.createElement("div");
+                stepDiv.id = "stepDiv";
+
+                var infoDiv = document.createElement("div");
+                infoDiv.classList.add("text-center");
+
+                var infoSpan = document.createElement("span");
+                infoSpan.innerHTML = `<h3>Step: ${stepsCounter + 1}</h3>`;
+
+                infoDiv.appendChild(infoSpan);
+
+                var closeBtn = document.createElement("btn");
+                closeBtn.classList.add("btn");
+                closeBtn.classList.add("btn-small");
+                closeBtn.classList.add("btn-danger");
+                closeBtn.textContent = "Delete step";
+
+                infoDiv.appendChild(closeBtn);
+
+                stepDiv.appendChild(infoDiv);
+
+                var imgAndDescrDiv = document.createElement("div");
+                imgAndDescrDiv.classList.add("row");
+
+                var imgDiv = document.createElement("div");
+                imgDiv.classList.add("col-sm");
+                imgDiv.classList.add("mt-4");
+
+                var img = document.createElement("img");
+                img.id = "step-img" + stepsCounter;
+                img.classList.add("img-fluid");
+                img.src = "https://res.cloudinary.com/dlx1dwguj/image/upload/v1607668086/default-placeholder_pohpbi.png";
+
+                imgDiv.appendChild(img);
+
+                var selectImgDiv = document.createElement("div");
+                selectImgDiv.classList.add("custom-file");
+                selectImgDiv.classList.add("mt-3");
+
+                var imgInput = document.createElement("input");
+                imgInput.type = "file";
+                imgInput.name = `Steps[${stepsCounter}].Image`;
+                imgInput.classList.add("form-control")
+                imgInput.classList.add("custom-file-input");
+
+                imgInput.addEventListener("change", function () {
+                    var fileLabel = $(this).next('.custom-file-label');
+                    var files = $(this)[0].files;
+
+                    fileLabel.html(files[0].name);
+                });
+
+                imgInput.addEventListener("change", function (e) {
+                    this.parentElement.previousSibling.src = window.URL.createObjectURL(e.target.files[0]);
+                });
+
+                selectImgDiv.appendChild(imgInput);
+
+                var selectImgLabel = document.createElement("label");
+                selectImgLabel.textContent = "Select image";
+                selectImgLabel.classList.add("custom-file-label");
+
+                selectImgDiv.appendChild(selectImgLabel);
+
+                imgDiv.appendChild(selectImgDiv);
+
+                imgAndDescrDiv.appendChild(imgDiv);
+
+                var descDiv = document.createElement("div");
+                descDiv.classList.add("col-sm");
+                descDiv.classList.add("text-center");
+
+                var label = document.createElement("label");
+                label.textContent = "Description";
+
+                descDiv.appendChild(label);
+
+                var textArea = document.createElement("textarea");
+                textArea.classList.add("form-control");
+                textArea.name = `Steps[${stepsCounter}].Description`;
+                textArea.setAttribute("rows", 14);
+
+                descDiv.appendChild(textArea);
+                imgAndDescrDiv.appendChild(descDiv);
+                stepDiv.appendChild(imgAndDescrDiv);
+
+                stepsCounter++;
+
+                $("#stepsContainer").append(stepDiv);
+            });
+        });
+    </script>
+}

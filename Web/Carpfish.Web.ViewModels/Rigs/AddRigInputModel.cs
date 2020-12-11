@@ -19,11 +19,11 @@
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Select main image")]
+        [Display(Name = "Select image")]
         public IFormFile Image { get; set; }
 
         public IEnumerable<AddStepInputModel> Steps { get; set; }
 
-        public IEnumerable<AddMaterialInputModel> Materials { get; set; }
+        public ICollection<AddMaterialInputModel> Materials { get; set; }
     }
 }
