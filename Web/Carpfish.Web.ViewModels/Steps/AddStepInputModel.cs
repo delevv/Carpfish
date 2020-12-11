@@ -8,9 +8,6 @@
 
     public class AddStepInputModel
     {
-        [Range(GlobalConstants.StepNumberMinValue, GlobalConstants.StepNumberMaxValue)]
-        public int StepNumber { get; set; }
-
         [Required]
         [Display(Name = "Select step image")]
         public IFormFile Image { get; set; }

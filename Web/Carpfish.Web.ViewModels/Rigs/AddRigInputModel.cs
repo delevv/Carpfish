@@ -22,8 +22,8 @@
         [Display(Name = "Select image")]
         public IFormFile Image { get; set; }
 
-        public IEnumerable<AddStepInputModel> Steps { get; set; }
+        public List<AddStepInputModel> Steps { get; set; }
 
-        public ICollection<AddMaterialInputModel> Materials { get; set; }
+        public List<AddMaterialInputModel> Materials { get; set; }
     }
 }

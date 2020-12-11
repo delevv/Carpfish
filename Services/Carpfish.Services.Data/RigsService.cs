@@ -1,6 +1,5 @@
 ﻿namespace Carpfish.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -41,26 +40,26 @@
                 Url = rigImgUrl,
             };
 
-            foreach (var material in input.Materials)
+            for (int i = 0; i < input.Materials.Count(); i++)
             {
                 rig.Materials.Add(new Material
                 {
                     Rig = rig,
-                    Description = material.Description,
-                    MaterialNumber = material.MaterialNumber,
+                    Description = input.Materials[i].Description,
+                    MaterialNumber = i + 1,
                 });
             }
 
-            foreach (var step in input.Steps)
+            for (int i = 0; i < input.Steps.Count(); i++)
             {
                 // TODO: Validate Image
-                var stepImgUrl = await this.cloudinaryService.UploadAsync(step.Image, step.Image.FileName);
+                var stepImgUrl = await this.cloudinaryService.UploadAsync(input.Steps[i].Image, input.Steps[i].Image.FileName);
 
                 rig.Steps.Add(new Step
                 {
                     Rig = rig,
-                    Description = step.Description,
-                    StepNumber = step.StepNumber,
+                    Description = input.Steps[i].Description,
+                    StepNumber = i + 1,
                     Image = new Image
                     {
                         OwnerId = userId,

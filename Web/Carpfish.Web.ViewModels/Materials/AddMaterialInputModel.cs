@@ -7,9 +7,6 @@
 
     public class AddMaterialInputModel
     {
-        [Range(GlobalConstants.MaterialNumberMinValue, GlobalConstants.MaterialNumberMaxValue)]
-        public int MaterialNumber { get; set; }
-
         [Required]
         [MaxLength(GlobalConstants.MaterialDescriptionMaxLength)]
         public string Description { get; set; }
