@@ -1,5 +1,6 @@
 ﻿@model Carpfish.Web.ViewModels.Rigs.AddRigInputModel
-@{
+@{ 
+    this.ViewData["Title"] = "Add new rig";
 }
 
 <form method="post" enctype="multipart/form-data" class="col-md-8 offset-md-2">
@@ -34,8 +35,17 @@
     <hr />
 
     <div class="text-center">
-        <div id="materialsContainer" class="row"></div>
-        <a id="materialsBtn" class="btn btn-success mt-2">Add Material</a>
+        <div id="materialsContainer" class="row">
+            <div id="first-material" class="input-group col-md-8 offset-md-2 mt-2">
+                <div class="input-group-prepend">
+                    <span id="material-0" class="input-group-text">1</span>
+                </div>
+                <input type="text" asp-for="Materials[0].Description" class="form-control" aria-describedby="material-0" />
+                <button id="material-del-btn"class="btn btn-danger">X</button>
+                <span asp-validation-for="Materials[0].Description" class="col-xl-12 text-danger"></span>
+            </div>
+        </div>
+        <a id="materialsBtn" class="btn btn-success mt-2">Add More Materials</a>
     </div>
     <!------------------ Rig Materials --------------------->
     <!------------------ Rig Steps --------------------->
@@ -45,7 +55,7 @@
     <div>
         <div id="stepsContainer"></div>
         <div class="text-center">
-            <a id="stepsBtn" class="btn btn-success mt-2">Add Step</a>
+            <a id="stepsBtn" class="btn btn-success mt-2">Add More Steps</a>
         </div>
     </div>
     <!------------------ Rig Steps --------------------->
@@ -70,46 +80,22 @@
                 fileLabel.html(files[0].name);
             });
 
+            //activate material delete btn
+            $("#material-del-btn").on("click", function () {
+                this.parentNode.remove();
+            });
+
             //append input field for material
             var materialsCounter = 0;
             $("#materialsBtn").on("click", function () {
-                var materialDiv = document.createElement("div");
-                materialDiv.classList.add("col-md-8");
-                materialDiv.classList.add("mt-2");
-                materialDiv.classList.add("offset-md-2");
-                materialDiv.classList.add("input-group");
+                var currInput = document.getElementById("first-material").cloneNode(true);
 
-                var numberDiv = document.createElement("div");
-                numberDiv.classList.add("input-group-prepend");
 
-                var span = document.createElement("span");
-                span.classList.add("input-group-text");
-                span.textContent = materialsCounter + 1;
-                span.id = `material${materialsCounter}`;
-
-                numberDiv.appendChild(span);
-                materialDiv.appendChild(numberDiv);
-
-                var materialInput = document.createElement('input');
-                materialInput.type = "text";
-                materialInput.setAttribute("aria-describedby", `material${materialsCounter}`);
-                materialInput.name = `Materials[${materialsCounter++}].Description`;
-                materialInput.classList.add("form-control");
-
-                materialDiv.appendChild(materialInput);
-
-                var delBtn = document.createElement('btn');
-                delBtn.classList.add("btn");
-                delBtn.classList.add("btn-danger");
-                delBtn.textContent = "X";
-
-                delBtn.addEventListener("click", function () {
+                console.log(currInput.querySelectorAll("span")[0]);
+                
+                $("#material-del-btn").on("click", function () {
                     this.parentNode.remove();
                 });
-
-                materialDiv.appendChild(delBtn);
-
-                $("#materialsContainer").append(materialDiv);
             });
 
             //append step
