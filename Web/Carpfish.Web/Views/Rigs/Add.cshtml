@@ -117,6 +117,7 @@
                 span.id = `material-${currMaterialNumber}`;
 
                 var input = div.querySelectorAll("input")[0];
+                input.value = "";
                 input.setAttribute("aria-describedby", `material-${currMaterialNumber}`);
                 input.id = input.id.replace(/\d+/, currMaterialNumber);
                 input.name = input.name.replace(/\d+/, currMaterialNumber);
@@ -177,6 +178,11 @@
                 btn.addEventListener("click", function () {
                     this.parentNode.parentNode.remove();
                 });
+
+                //clear previous data
+                div.querySelectorAll("img")[0].src = "https://res.cloudinary.com/dlx1dwguj/image/upload/v1607668086/default-placeholder_pohpbi.png";
+                div.querySelectorAll(".custom-file-label")[0].textContent = "Select image";
+                textArea.value = "";
 
                 document.getElementById("stepsContainer").appendChild(div);
             });
