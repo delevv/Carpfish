@@ -18,8 +18,8 @@
                     <a asp-controller="Trophies" asp-action="ById" asp-route-id="@trophy.Id" class="stretched-link"></a>
                 </div>
                 <div class="col-md-6">
-                    <div class="card-body flex-fill">
-                        <span class="d-inline-flex">
+                    <div class="card-body col">
+                        <span>
                             <i class="fas fa-weight-hanging text-info"></i>
                             <span class="card-text ml-2">@trophy.Weight.ToString("f3")</span>
                         </span>
@@ -32,8 +32,8 @@
                                asp-route-id="@trophy.LakeId">@trophy.LakeName</a>
                         </div>
                         <hr />
-                        <span class="d-inline-flex">
-                            <i class="fas fa-user text-info fa-pull-left"></i>
+                        <span>
+                            <i class="fas fa-user text-info"></i>
                             <span class="card-text ml-2">@trophy.OwnerUserName</span>
                         </span>
                     </div>
