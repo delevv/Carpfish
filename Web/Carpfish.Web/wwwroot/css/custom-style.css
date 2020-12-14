@@ -223,3 +223,12 @@
 #stepDiv {
     border: solid 5px hsla(0, 95%, 35%, 1);
 }
+
+/*---------------Rigs/ById----------------*/
+.text-dots{
+    display: inline;
+}
+
+.text-more{
+    display: none;
+}

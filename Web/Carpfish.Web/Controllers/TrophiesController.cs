@@ -1,13 +1,14 @@
 ﻿namespace Carpfish.Web.Controllers
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     using Carpfish.Common;
     using Carpfish.Services.Data;
     using Carpfish.Web.ViewModels.Trophies;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     public class TrophiesController : Controller
     {

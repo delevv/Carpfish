@@ -1,0 +1,101 @@
+﻿@model Carpfish.Web.ViewModels.Rigs.RigByIdViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+
+<h2 class="text-center">@Model.Name</h2>
+
+<div class="mt-4">
+    <div class="row no-gutters">
+        <div class="col-md-6 embed-responsive embed-responsive-4by3">
+            <img src="@Model.ImageUrl" class="card-img embed-responsive-item" alt="rig main img">
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <ul class="row list-unstyled text-center">
+                    <li class="col-sm mt-2">
+                        <span class="text-secondary">Trophies</span>
+                        <i class="fas fa-fish fa-lg text-secondary ml-2"><span class="ml-2">@Model.Trophies.Count()</span></i>
+                    </li>
+                    <li class="col-sm mt-2">
+                        <span class="text-secondary">Steps</span>
+                        <i class="fas fa-shoe-prints fa-lg text-secondary ml-2"><span class="ml-2">@Model.Steps.Count()</span></i>
+                    </li>
+                    <li class="col-sm mt-2">
+                        <span class="text-secondary">Materials</span>
+                        <i class="fas fa-toolbox fa-lg text-secondary ml-2"><span class="ml-2">@Model.Materials.Count()</span></i>
+                    </li>
+                </ul>
+                <div class="card-text text-center mt-5">
+                    <span class="font-weight-bold">Description</span>
+                    <p class="mt-3">@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mt-3 text-center">
+        <h2>Needed Materials</h2>
+        <ul class="d-flex flex-wrap list-unstyled text-center">
+            @foreach (var material in Model.Materials.OrderBy(m => m.MaterialNumber))
+            {
+                <li class="col-lg-4 col-md-6 mt-4">
+                    <h3><span class="badge badge-success">@material.Description</span></h3>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="mt-5 text-center">
+        <h2 class="mb-4">Create Rig</h2>
+        <ul class="d-flex flex-wrap list-unstyled text-center">
+            @foreach (var step in Model.Steps.OrderBy(x => x.StepNumber))
+            {
+                <li class="col-md-6 border border-info">
+                    <h3>Step: @step.StepNumber</h3>
+                    <div class="col embed-responsive embed-responsive-4by3">
+                        <img src="@step.ImageUrl" class="card-img embed-responsive-item" alt="rig main img">
+                    </div>
+                    <p class="text-left font-italic">
+                        @step.LessDescription
+                        @if (step.MoreDescription.Length != 0)
+                        {
+                            <span class="text-dots">...</span>
+                            <span class="text-more">@step.MoreDescription</span>
+                        }
+                    </p>
+                    @if (step.MoreDescription.Length != 0)
+                    {
+                        <button class="btn-sm btn-success mb-2 readMoreBtn">Read more</button>
+                    }
+
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            Array.from(document.getElementsByClassName("readMoreBtn")).forEach(btn => {
+                btn.addEventListener("click", function () {
+                    ReadMore(this);
+                }, false);
+            });
+        });
+
+        function ReadMore(button) {
+            var dots = button.parentElement.querySelector(".text-dots");
+            var moreText = button.parentElement.querySelector(".text-more");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                button.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                button.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
+}

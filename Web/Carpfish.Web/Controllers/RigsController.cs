@@ -67,5 +67,11 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            var viewModel = this.rigsService.GetById<RigByIdViewModel>(id);
+            return this.View(viewModel);
+        }
     }
 }
