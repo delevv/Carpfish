@@ -57,5 +57,8 @@
 
         // TrophiesController/All
         public const int TrophiesCountPerPage = 6;
+
+        // RigsController/All
+        public const int RigsCountPerPage = 6;
     }
 }

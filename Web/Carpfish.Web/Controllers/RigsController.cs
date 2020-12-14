@@ -3,7 +3,7 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using Carpfish.Common;
     using Carpfish.Services.Data;
     using Carpfish.Web.ViewModels.Rigs;
     using Microsoft.AspNetCore.Authorization;
@@ -48,6 +48,24 @@
 
             // TODO: Redirect to rig byid page
             return this.Redirect("/");
+        }
+
+        public IActionResult All(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = new RigsListViewModel()
+            {
+                ItemsPerPage = GlobalConstants.RigsCountPerPage,
+                ItemsCount = this.rigsService.GetCount(),
+                PageNumber = id,
+                Rigs = this.rigsService.GetAll<RigInListViewModel>(id, GlobalConstants.RigsCountPerPage),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

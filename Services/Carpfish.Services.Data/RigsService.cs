@@ -89,5 +89,10 @@
                  .To<T>()
                  .FirstOrDefault();
         }
+
+        public int GetCount()
+        {
+            return this.rigsRepository.All().Count();
+        }
     }
 }

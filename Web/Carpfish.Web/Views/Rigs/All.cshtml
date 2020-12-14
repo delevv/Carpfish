@@ -1,0 +1,44 @@
+﻿@model Carpfish.Web.ViewModels.Rigs.RigsListViewModel
+@{
+    this.ViewData["Title"] = "Rigs List";
+}
+
+<div class="row justify-content-center">
+    <a asp-action="Add"><input class="btn btn-primary" value="Add Rig" /></a>
+</div>
+
+<div class="row col-md-10 offset-md-1 mt-2">
+    @foreach (var rig in Model.Rigs)
+    {
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4 embed-responsive embed-responsive-4by3">
+                    <img src="@rig.ImageUrl" class="card-img embed-responsive-item" alt="rig main img">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@rig.Name</h5>
+                        <p class="card-text">@rig.Description</p>
+                        <ul class="row list-unstyled text-center">
+                            <li class="col-sm">
+                                <span class="text-secondary">Trophies</span>
+                                <i class="fas fa-fish fa-lg text-secondary ml-2"><span class="ml-2">@rig.TrophiesCount</span></i>
+                            </li>
+                            <li class="col-sm">
+                                <span class="text-secondary">Steps</span>
+                                <i class="fas fa-shoe-prints fa-lg text-secondary ml-2"><span class="ml-2">@rig.StepsCount</span></i>
+                            </li>
+                            <li class="col-sm">
+                                <span class="text-secondary">Materials</span>
+                                <i class="fas fa-toolbox fa-lg text-secondary ml-2"><span class="ml-2">@rig.MaterialsCount</span></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr />
+<partial name="_PagingPartial" model="@Model" />

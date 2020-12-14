@@ -12,5 +12,7 @@
         Task AddAsync(AddRigInputModel input, string userId);
 
         T GetById<T>(int id);
+
+        int GetCount();
     }
 }
