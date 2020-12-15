@@ -18,7 +18,7 @@
 
         public string IsFree { get; set; }
 
-        public double Rating { get; set; }
+        public double AverageRating { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -28,7 +28,9 @@
                                       .FirstOrDefault(li => li.IsMain)
                                       .Image.Url))
                 .ForMember(x => x.IsFree, opt =>
-                    opt.MapFrom(l => l.IsFree ? "Free" : "Paid"));
+                    opt.MapFrom(l => l.IsFree ? "Free" : "Paid"))
+                .ForMember(x => x.AverageRating, opt =>
+                 opt.MapFrom(l => l.LakeVotes.Any() ? l.LakeVotes.Average(lv => lv.Vote.Value) : 0));
         }
     }
 }

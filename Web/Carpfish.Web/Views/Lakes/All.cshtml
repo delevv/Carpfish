@@ -1,12 +1,11 @@
 ﻿@model Carpfish.Web.ViewModels.Lakes.LakesListViewModel
 @{
-    this.ViewData["Title"] = "All Lakes, page " + Model.PageNumber;
+    this.ViewData["Title"] = "All Lakes";
 }
 
-<div class="row justify-content-center">
-     <a asp-action="Add"><input class="btn btn-primary" value="Add Lake"/></a>
+<div class="row justify-content-center mb-3">
+    <a asp-action="Add"><input class="btn btn-primary" value="Add Lake" /></a>
 </div>
-<h1 class="text-center">@this.ViewData["Title"]</h1>
 <div class="row">
     @foreach (var lake in this.Model.Lakes)
     {
@@ -16,11 +15,24 @@
                     <img src="@lake.ImgUrl" class="card-img-top embed-responsive-item" alt="@lake.Name image">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">@lake.Name</h5>
-                    <p class="card-text">@lake.CountryName</p>
-                    <p class="card-text">@lake.IsFree</p>
-                    <p class="card-text">@lake.Rating</p>
-                    <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-primary stretched-link">More Info</a>
+                    <div class="text-center">
+                        <h5 class="card-title">@lake.Name</h5>
+                    </div>
+                    <div>
+                        <i class="far fa-flag text-info"></i>
+                        <span class="ml-2">@lake.CountryName</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-euro-sign @(lake.IsFree =="Free" ? "text-success" : "text-danger")"></i>
+                        <span class="ml-2">@lake.IsFree</span>
+                    </div>
+                    <div>
+                        <i class="far fa-star text-warning"></i>
+                        <span class="ml-2">@lake.AverageRating.ToString("f1")</span>
+                    </div>
+                    <div class="text-center">
+                        <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-primary mt-2">Show More</a>
+                    </div>
                 </div>
             </div>
         </div>
