@@ -3,6 +3,7 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using Carpfish.Common;
     using Carpfish.Services.Data;
     using Carpfish.Web.ViewModels.Rigs;

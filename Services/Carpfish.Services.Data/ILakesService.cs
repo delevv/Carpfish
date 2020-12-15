@@ -9,6 +9,8 @@
     {
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
+        IEnumerable<T> GetAll<T>();
+
         Task AddAsync(AddLakeInputModel input, string userId);
 
         T GetById<T>(int id);

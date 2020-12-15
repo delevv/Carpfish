@@ -3,11 +3,11 @@
 @{
     this.ViewData["Title"] = "Home Page";
 }
+@model Carpfish.Web.ViewModels.Home.IndexViewModel;
 @inject IConfiguration Configuration
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <div id="lakesMap"></div>
@@ -18,7 +18,7 @@
             crossorigin=""></script>
 
     <script>
-        var mymap = L.map('lakesMap').setView([42.73, 25.48], 8);
+        var mymap = L.map('lakesMap').setView([42.73, 25.48], 7);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -28,5 +28,36 @@
             zoomOffset: -1,
             accessToken: '@this.Configuration["MapBox:Token"]'
         }).addTo(mymap);
+
+        function addMarker(latitude, longitude, lakeName, lakeStatus, lakeId) {
+            var marker = L.marker([latitude, longitude]).addTo(mymap);
+
+            marker.bindPopup(`
+                <div class="text-center">
+                    <div class="text-primary font-weight-bold">
+                        <i class="fas fa-water"></i>
+                        <span class="ml-2">${lakeName}</span>
+                    </div>
+                    <div class="${lakeStatus==='Free' ? 'text-success' : 'text-danger'} font-weight-bold">
+                        <i class="fas fa-euro-sign"></i>
+                        <span class="ml-2">${lakeStatus}</span>
+                    </div>
+                </div>`);
+            marker.on('mouseover', function (e) {
+                this.openPopup();
+            });
+            marker.on('mouseout', function (e) {
+                this.closePopup();
+            });
+
+            marker.on('click', function (e) {
+                window.location.href = `/lakes/byid/${lakeId}`;
+            });
+        }
+
+        @foreach (var lake in Model.MapLakes)
+        {
+            @:addMarker(@lake.LocationLatitude, @lake.LocationLongitude, '@lake.Name','@lake.PaidOrFree', @lake.Id);
+        }
     </script>
 }

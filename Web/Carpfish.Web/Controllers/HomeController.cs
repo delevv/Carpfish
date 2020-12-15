@@ -2,15 +2,28 @@
 {
     using System.Diagnostics;
 
+    using Carpfish.Services.Data;
     using Carpfish.Web.ViewModels;
-
+    using Carpfish.Web.ViewModels.Home;
+    using Carpfish.Web.ViewModels.Lakes;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly ILakesService lakesService;
+
+        public HomeController(ILakesService lakesService)
+        {
+            this.lakesService = lakesService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexViewModel
+            {
+                MapLakes = this.lakesService.GetAll<LakeInIndexMapViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()
