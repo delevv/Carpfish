@@ -35,8 +35,13 @@
                 CountryId = input.CountryId,
                 Area = input.Area,
                 IsFree = input.IsFree,
-                Coordinates = input.Coordinates,
                 WebsiteUrl = input.WebsiteUrl,
+            };
+
+            lake.Location = new Location
+            {
+                Latitude = input.Location.Latitude,
+                Longitude = input.Location.Longitude,
             };
 
             // TODO: Validate Image

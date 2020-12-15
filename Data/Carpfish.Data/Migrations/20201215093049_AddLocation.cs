@@ -7,12 +7,9 @@ namespace Carpfish.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "LocationId",
-                table: "Lakes",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropColumn(
+                name: "Coordinates",
+                table: "Lakes");
 
             migrationBuilder.CreateTable(
                 name: "Locations",
@@ -34,7 +31,7 @@ namespace Carpfish.Data.Migrations
                         column: x => x.LakeId,
                         principalTable: "Lakes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -49,9 +46,11 @@ namespace Carpfish.Data.Migrations
             migrationBuilder.DropTable(
                 name: "Locations");
 
-            migrationBuilder.DropColumn(
-                name: "LocationId",
-                table: "Lakes");
+            migrationBuilder.AddColumn<string>(
+                name: "Coordinates",
+                table: "Lakes",
+                type: "nvarchar(max)",
+                nullable: true);
         }
     }
 }

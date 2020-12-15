@@ -29,9 +29,6 @@
         [Range(GlobalConstants.LakeMinArea, GlobalConstants.LakeMaxArea)]
         public double Area { get; set; }
 
-        public int LocationId { get; set; }
-
-        [Required]
         public virtual Location Location { get; set; }
 
         public virtual ICollection<LakeImage> LakeImages { get; set; }
@@ -39,8 +36,6 @@
         public int CountryId { get; set; }
 
         public virtual Country Country { get; set; }
-
-        public string Coordinates { get; set; }
 
         public string WebsiteUrl { get; set; }
 

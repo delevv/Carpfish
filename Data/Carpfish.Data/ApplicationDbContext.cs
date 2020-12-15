@@ -103,9 +103,9 @@
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            // custom relationships
+            // define relationships
             builder.Entity<Lake>()
-                .HasOne(l => l.Location)
+                .HasOne<Location>(l => l.Location)
                 .WithOne(l => l.Lake)
                 .HasForeignKey<Location>(l => l.LakeId);
         }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carpfish.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201215081336_AddLocation")]
+    [Migration("20201215093049_AddLocation")]
     partial class AddLocation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,9 +314,6 @@ namespace Carpfish.Data.Migrations
                     b.Property<double>("Area")
                         .HasColumnType("float");
 
-                    b.Property<string>("Coordinates")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
@@ -331,9 +328,6 @@ namespace Carpfish.Data.Migrations
 
                     b.Property<bool>("IsFree")
                         .HasColumnType("bit");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -967,7 +961,7 @@ namespace Carpfish.Data.Migrations
                     b.HasOne("Carpfish.Data.Models.Lake", "Lake")
                         .WithOne("Location")
                         .HasForeignKey("Carpfish.Data.Models.Location", "LakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Lake");
@@ -1178,8 +1172,7 @@ namespace Carpfish.Data.Migrations
 
                     b.Navigation("LakeVotes");
 
-                    b.Navigation("Location")
-                        .IsRequired();
+                    b.Navigation("Location");
 
                     b.Navigation("Trophies");
                 });

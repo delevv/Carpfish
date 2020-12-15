@@ -7,6 +7,7 @@
     using AutoMapper;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
+    using Carpfish.Web.ViewModels.Location;
     using Carpfish.Web.ViewModels.Trophies;
 
     public class LakeByIdViewModel : IMapFrom<Lake>, IHaveCustomMappings
@@ -54,6 +55,8 @@
                  opt.MapFrom(l => l.LakeImages
                                      .FirstOrDefault(li => li.IsMain)
                                      .Image.Url))
+               .ForMember(x => x.Coordinates, opt =>
+                  opt.MapFrom(l => $"({l.Location.Latitude}, {l.Location.Longitude})"))
                .ForMember(x => x.IsFree, opt =>
                    opt.MapFrom(l => l.IsFree ? "Free" : "Paid"))
                .ForMember(x => x.OtherImages, opt =>

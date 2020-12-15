@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Carpfish.Common;
+    using Carpfish.Web.ViewModels.Location;
     using Microsoft.AspNetCore.Http;
 
     public class AddLakeInputModel
@@ -16,12 +17,13 @@
 
         [Required]
         [Range(GlobalConstants.LakeMinArea, GlobalConstants.LakeMaxArea)]
+        [Display(Name = "Area(km2)")]
         public double Area { get; set; }
 
         [Display(Name = "Select Country")]
         public int CountryId { get; set; }
 
-        public string Coordinates { get; set; }
+        public LocationLakeInputModel Location { get; set; }
 
         [Display(Name = "Website Url")]
         public string WebsiteUrl { get; set; }
