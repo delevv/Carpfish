@@ -44,6 +44,8 @@
 
         public DbSet<Material> Materials { get; set; }
 
+        public DbSet<Location> Locations { get; set; }
+
         public DbSet<TrophyImage> TrophyImages { get; set; }
 
         public DbSet<ItemImage> ItemImages { get; set; }
@@ -100,6 +102,12 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            // custom relationships
+            builder.Entity<Lake>()
+                .HasOne(l => l.Location)
+                .WithOne(l => l.Lake)
+                .HasForeignKey<Location>(l => l.LakeId);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

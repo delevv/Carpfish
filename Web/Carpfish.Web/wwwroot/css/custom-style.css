@@ -270,3 +270,10 @@
 .carousel-inner .carousel-item-left {
     transform: translateX(0);
 }
+
+/*----------------- Home Page ------------------*/
+
+#lakesMap {
+    height: 500px;
+    border: 1px solid #AAA;
+}

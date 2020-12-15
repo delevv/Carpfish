@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using Carpfish.Common;
     using Carpfish.Data.Common.Models;
@@ -27,6 +28,11 @@
         [Required]
         [Range(GlobalConstants.LakeMinArea, GlobalConstants.LakeMaxArea)]
         public double Area { get; set; }
+
+        public int LocationId { get; set; }
+
+        [Required]
+        public virtual Location Location { get; set; }
 
         public virtual ICollection<LakeImage> LakeImages { get; set; }
 

@@ -52,6 +52,12 @@
         public const int MaterialRigIdMinValue = 1;
         public const int MaterialRigIdMaxValue = int.MaxValue;
 
+        // Location
+        public const double LocationLatitudeMinValue = -90.00;
+        public const double LocationLatitudeMaxValue = +90.00;
+        public const double LocationLongitudeMinValue = -180.00;
+        public const double LocationLongitudeMaxValue = +180.00;
+
         // LakesController/All
         public const int LakesCountPerPage = 6;
 
