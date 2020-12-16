@@ -14,11 +14,16 @@
     {
         private readonly ILakesService lakesService;
         private readonly ITrophiesService trophiesService;
+        private readonly IRigsService rigsService;
 
-        public TrophiesController(ILakesService lakesService, ITrophiesService trophiesService)
+        public TrophiesController(
+            ILakesService lakesService,
+            ITrophiesService trophiesService,
+            IRigsService rigsService)
         {
             this.lakesService = lakesService;
             this.trophiesService = trophiesService;
+            this.rigsService = rigsService;
         }
 
         [Authorize]
@@ -27,6 +32,7 @@
             var viewModel = new AddTrophyInputModel
             {
                 LakesItems = this.lakesService.GetAllAsKeyValuePairs(),
+                RigsItems = this.rigsService.GetAllAsKeyValuePairs(),
             };
             return this.View(viewModel);
         }
@@ -38,6 +44,7 @@
             if (!this.ModelState.IsValid)
             {
                 input.LakesItems = this.lakesService.GetAllAsKeyValuePairs();
+                input.RigsItems = this.rigsService.GetAllAsKeyValuePairs();
                 return this.View(input);
             }
 
@@ -54,7 +61,7 @@
             }
 
             // TODO: Redirect to lake info page
-            return this.Redirect("/");
+            return this.RedirectToAction("All");
         }
 
         public IActionResult All(int id = 1)

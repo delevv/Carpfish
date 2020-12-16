@@ -19,6 +19,9 @@
         [Display(Name = "Select Lake")]
         public int LakeId { get; set; }
 
+        [Display(Name = "Select Rig")]
+        public int? RigId { get; set; }
+
         [Required]
         [Display(Name = "Select main image")]
         public IFormFile MainImage { get; set; }
@@ -27,5 +30,7 @@
         public IEnumerable<IFormFile> OtherImages { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> LakesItems { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> RigsItems { get; set; }
     }
 }

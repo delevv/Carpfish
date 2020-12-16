@@ -16,5 +16,7 @@
         IEnumerable<T> GetFiveRigsWithMostTrophies<T>();
 
         int GetCount();
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

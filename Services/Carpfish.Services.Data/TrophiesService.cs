@@ -29,6 +29,7 @@
                 Weight = input.Weight,
                 BaitDescription = input.BaitDescription,
                 LakeId = input.LakeId,
+                RigId = input.RigId,
                 OwnerId = userId,
             };
 
