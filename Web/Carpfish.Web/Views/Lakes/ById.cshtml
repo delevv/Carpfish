@@ -64,7 +64,7 @@
             <li class="mt-3"><i class="fas fa-user-tag"></i><span class="ml-3">@Model.OwnerUserName</span></li>
             <li class="mt-3">
                 <i class="fas fa-map-marked-alt"></i>
-                <a href=@string.Format($"http://www.google.com/maps/place/{Model.LocationLatitude},{Model.LocationLongitude},12z/data=!5m1!1e4")>Map</a>
+                <a href=@string.Format($"https://www.google.com/maps/search/?api=1&query={Model.LocationLatitude},{Model.LocationLongitude}")>Map</a>
             </li>
             @if (Model.WebsiteUrl != null)
             {
