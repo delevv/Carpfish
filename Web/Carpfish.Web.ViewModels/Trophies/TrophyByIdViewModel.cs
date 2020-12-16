@@ -12,13 +12,19 @@
 
         public double Weight { get; set; }
 
+        public string BaitDescription { get; set; }
+
         public string OwnerId { get; set; }
 
         public string OwnerUserName { get; set; }
 
         public int LakeId { get; set; }
 
+        public int? RigId { get; set; }
+
         public string LakeName { get; set; }
+
+        public string RigName { get; set; }
 
         public string MainImage { get; set; }
 
