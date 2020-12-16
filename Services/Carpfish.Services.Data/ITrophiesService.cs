@@ -12,5 +12,7 @@
         Task AddAsync(AddTrophyInputModel input, string userId);
 
         T GetById<T>(int id);
+
+        int GetCount();
     }
 }

@@ -74,7 +74,7 @@
             var viewModel = new TrophiesListViewModel()
             {
                 ItemsPerPage = GlobalConstants.TrophiesCountPerPage,
-                ItemsCount = this.lakesService.GetCount(),
+                ItemsCount = this.trophiesService.GetCount(),
                 PageNumber = id,
                 Trophies = this.trophiesService.GetAll<TrophyInListViewModel>(id, GlobalConstants.TrophiesCountPerPage),
             };
