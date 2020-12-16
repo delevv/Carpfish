@@ -94,5 +94,14 @@
         {
             return this.rigsRepository.All().Count();
         }
+
+        public IEnumerable<T> GetFiveRigsWithMostTrophies<T>()
+        {
+            return this.rigsRepository.All()
+                 .OrderByDescending(r => r.Trophies.Count)
+                 .Take(5)
+                 .To<T>()
+                 .ToList();
+        }
     }
 }

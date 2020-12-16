@@ -6,15 +6,20 @@
     using Carpfish.Web.ViewModels;
     using Carpfish.Web.ViewModels.Home;
     using Carpfish.Web.ViewModels.Lakes;
+    using Carpfish.Web.ViewModels.Rigs;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
         private readonly ILakesService lakesService;
+        private readonly IRigsService rigsService;
 
-        public HomeController(ILakesService lakesService)
+        public HomeController(
+            ILakesService lakesService,
+            IRigsService rigsService)
         {
             this.lakesService = lakesService;
+            this.rigsService = rigsService;
         }
 
         public IActionResult Index()
@@ -22,6 +27,7 @@
             var viewModel = new IndexViewModel
             {
                 MapLakes = this.lakesService.GetAll<LakeInIndexMapViewModel>(),
+                Rigs = this.rigsService.GetFiveRigsWithMostTrophies<TopRigInIndexViewModel>(),
             };
             return this.View(viewModel);
         }

@@ -13,6 +13,8 @@
 
         T GetById<T>(int id);
 
+        IEnumerable<T> GetFiveRigsWithMostTrophies<T>();
+
         int GetCount();
     }
 }

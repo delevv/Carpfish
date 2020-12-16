@@ -18,7 +18,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">@rig.Name</h5>
-                        <p class="card-text">@rig.Description</p>
+                        <p class="card-text">@rig.Description.Substring(0, rig.Description.Length <= 100 ? rig.Description.Length : 100) ...</p>
                         <ul class="row list-unstyled text-center">
                             <li class="col-sm">
                                 <span class="text-secondary">Trophies</span>

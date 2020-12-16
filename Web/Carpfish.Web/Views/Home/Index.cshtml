@@ -6,11 +6,28 @@
 @model Carpfish.Web.ViewModels.Home.IndexViewModel;
 @inject IConfiguration Configuration
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+<div class="row">
+    <div class="col-3 text-center">
+        <h4>Top 5 Used Rigs</h4>
+        <ul class="list-unstyled">
+            @foreach (var rig in Model.Rigs)
+            {
+                <li class="media position-relative border border-success rounded mt-1">
+                    <img class="mr-3 img-fluid w-50" src="@rig.ImageUrl" alt=@($"{rig.Name} image")>
+                    <div class="media-body">
+                        <p class="mt-0 mb-1 font-weight-light">@rig.Name</p>
+                        <i class="fas fa-fish"><span class="ml-2">@rig.TrophiesCount</span></i>
+                    </div>
+                    <a asp-controller="Rigs" asp-action="ById" asp-route-id="@rig.Id" class="stretched-link"></a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-6 text-center">
+        <h4>Lakes Map</h4>
+        <div id="lakesMap"></div>
+    </div>
 </div>
-
-<div id="lakesMap"></div>
 
 @section Scripts{
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
