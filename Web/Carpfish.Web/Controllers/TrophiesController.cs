@@ -34,6 +34,7 @@
                 LakesItems = this.lakesService.GetAllAsKeyValuePairs(),
                 RigsItems = this.rigsService.GetAllAsKeyValuePairs(),
             };
+
             return this.View(viewModel);
         }
 

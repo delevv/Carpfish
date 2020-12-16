@@ -76,13 +76,16 @@
            asp-action="ById"
            asp-route-id="@Model.LakeId">@Model.LakeName</a>
     </div>
-    <div id="trophy-info-label" class="col-sm">
-        <i class="fas fa-tools text-info"></i>
-        <a class="ml-2"
-           asp-controller="Rigs"
-           asp-action="ById"
-           asp-route-id="@Model.RigId">@Model.RigName</a>
-    </div>
+    @if (Model.RigId != null)
+    {
+        <div id="trophy-info-label" class="col-sm">
+            <i class="fas fa-tools text-info"></i>
+            <a class="ml-2"
+               asp-controller="Rigs"
+               asp-action="ById"
+               asp-route-id="@Model.RigId">@Model.RigName</a>
+        </div>
+    }
     <div id="trophy-info-label" class="col-sm">
         <i class="fas fa-user text-info"></i>
         <span class="ml-2">@Model.OwnerUserName</span>
