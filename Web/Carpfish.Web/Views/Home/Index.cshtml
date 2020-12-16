@@ -6,27 +6,52 @@
 @model Carpfish.Web.ViewModels.Home.IndexViewModel;
 @inject IConfiguration Configuration
 
-<div class="row">
-    <div class="col-3 text-center">
+
+<div class="row text-center">
+    <!-- LeftPart-Rigs -->
+    <div class="col-lg-3 col-md-3">
         <h4>Top 5 Used Rigs</h4>
-        <ul class="list-unstyled">
-            @foreach (var rig in Model.Rigs)
-            {
-                <li class="media position-relative border border-success rounded mt-1">
-                    <img class="mr-3 img-fluid w-50" src="@rig.ImageUrl" alt=@($"{rig.Name} image")>
-                    <div class="media-body">
-                        <p class="mt-0 mb-1 font-weight-light">@rig.Name</p>
-                        <i class="fas fa-fish"><span class="ml-2">@rig.TrophiesCount</span></i>
-                    </div>
-                    <a asp-controller="Rigs" asp-action="ById" asp-route-id="@rig.Id" class="stretched-link"></a>
-                </li>
-            }
-        </ul>
+        @foreach (var rig in Model.Rigs)
+        {
+            <div class="row position-relative border rounded border-info mb-2">
+                <div class="col-6">
+                    <img class="img-fluid" src="@rig.ImageUrl" alt=@($"{rig.Name} image")>
+                </div>
+                <div class="col-6"> 
+                    <p class="mb-0">@rig.Name</p>
+                    <i class="fas fa-fish"><span class="ml-2">@rig.TrophiesCount</span></i>
+                </div>
+                <a asp-controller="Rigs" asp-action="ById" asp-route-id="@rig.Id" class="stretched-link"></a>
+            </div>
+        }
     </div>
-    <div class="col-6 text-center">
+    <!-- LeftPart-Rigs -->
+    <!-- MiddlePart-Map -->
+    <div class="col-lg-6 col-md-6">
         <h4>Lakes Map</h4>
         <div id="lakesMap"></div>
     </div>
+    <!-- MiddlePart-Map -->
+    <!-- RightPart-Trophies -->
+    <div class="col-lg-3 col-md-3">
+        <h4>Top 5 Trophies</h4>
+        @foreach (var trophy in Model.Trophies)
+        {
+            <div class="row border rounded border-info mb-2">
+                <div class="col-6">
+                    <img class="img-fluid" src="@trophy.Image" alt="trophy image">
+                    <a asp-controller="Trophies" asp-action="ById" asp-route-id="@trophy.Id" class="stretched-link"></a>
+                </div>
+                <div class="col-6">
+                    <p class="mt-0 mb-1 font-weight-light"></p>
+                    <i class="fas fa-fish"><span class="ml-2">@trophy.Weight.ToString("f3")</span></i>
+                    <p class="mt-0 mb-1 font-weight-light"></p>
+                    <i class="fas fa-water"><a asp-controller="Lakes" asp-action="ById" asp-route-id="@trophy.LakeId" class="ml-1">@trophy.LakeName</a></i>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- RightPart-Trophies -->
 </div>
 
 @section Scripts{

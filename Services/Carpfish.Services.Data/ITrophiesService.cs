@@ -11,6 +11,8 @@
 
         Task AddAsync(AddTrophyInputModel input, string userId);
 
+        IEnumerable<T> GetTopFiveBiggestTrophies<T>();
+
         T GetById<T>(int id);
 
         int GetCount();

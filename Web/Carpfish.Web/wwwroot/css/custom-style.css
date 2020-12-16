@@ -272,9 +272,7 @@
 }
 
 /*----------------- Home Page ------------------*/
-
 #lakesMap {
-    height: 450px;
-    width: auto;
+    height: 400px;
     border: 1px solid #AAA;
 }

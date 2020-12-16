@@ -94,5 +94,14 @@
         {
             return this.trophiesRepository.All().Count();
         }
+
+        public IEnumerable<T> GetTopFiveBiggestTrophies<T>()
+        {
+            return this.trophiesRepository.All()
+                .OrderByDescending(t => t.Weight)
+                .Take(5)
+                .To<T>()
+                .ToList();
+        }
     }
 }
