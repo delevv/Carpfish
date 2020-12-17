@@ -56,8 +56,7 @@
                 return this.View(input);
             }
 
-            // TODO: Redirect to lake info page
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult All(int id = 1)
@@ -81,12 +80,26 @@
         public IActionResult ById(int id)
         {
             var viewModel = this.lakesService.GetById<LakeByIdViewModel>(id);
+
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
+
             return this.View(viewModel);
         }
 
         [Authorize]
         public IActionResult Edit(int id)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var lakeOwnerId = this.lakesService.GetLakeOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != lakeOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             var inputModel = this.lakesService.GetById<EditLakeInputModel>(id);
             inputModel.CountriesItems = this.countriesService.GetAllAsKeyValuePairs();
 
@@ -97,6 +110,16 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id, EditLakeInputModel input)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var lakeOwnerId = this.lakesService.GetLakeOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != lakeOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             if (!this.ModelState.IsValid)
             {
                 input.CountriesItems = this.countriesService.GetAllAsKeyValuePairs();

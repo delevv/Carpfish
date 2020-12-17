@@ -17,6 +17,8 @@
 
         int GetCount();
 
+        string GetTrophyOwnerId(int trophyId);
+
         Task UpdateAsync(int id, EditTrophyInputModel input);
 
         Task DeleteAsync(int id);

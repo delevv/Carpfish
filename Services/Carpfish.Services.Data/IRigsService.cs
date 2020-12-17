@@ -17,6 +17,8 @@
 
         int GetCount();
 
+        string GetRigOwnerId(int rigId);
+
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         Task UpdateAsync(int id, EditRigInputModel input);

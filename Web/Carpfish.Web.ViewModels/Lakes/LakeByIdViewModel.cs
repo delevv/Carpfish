@@ -7,7 +7,6 @@
     using AutoMapper;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
-    using Carpfish.Web.ViewModels.Location;
     using Carpfish.Web.ViewModels.Trophies;
 
     public class LakeByIdViewModel : IMapFrom<Lake>, IHaveCustomMappings
@@ -15,6 +14,11 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        [IgnoreMap]
+        public bool IsUserCreator { get; set; }
+
+        public string OwnerId { get; set; }
 
         public string OwnerUserName { get; set; }
 

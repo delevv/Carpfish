@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using AutoMapper;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
     using Carpfish.Web.ViewModels.Materials;
@@ -17,6 +18,9 @@
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
+
+        [IgnoreMap]
+        public bool IsUserCreator { get; set; }
 
         public string OwnerId { get; set; }
 

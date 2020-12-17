@@ -16,6 +16,9 @@
 
         public string OwnerId { get; set; }
 
+        [IgnoreMap]
+        public bool IsUserCreator { get; set; }
+
         public string OwnerUserName { get; set; }
 
         public int LakeId { get; set; }

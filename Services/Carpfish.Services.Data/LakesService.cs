@@ -131,6 +131,13 @@
             return this.lakeRepository.All().Count();
         }
 
+        public string GetLakeOwnerId(int lakeId)
+        {
+            return this.lakeRepository.All()
+                .FirstOrDefault(l => l.Id == lakeId)
+                .OwnerId;
+        }
+
         public async Task UpdateAsync(int id, EditLakeInputModel input)
         {
             var lake = this.lakeRepository.All()

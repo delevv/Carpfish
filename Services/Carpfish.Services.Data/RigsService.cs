@@ -127,6 +127,13 @@
                  .ToList();
         }
 
+        public string GetRigOwnerId(int rigId)
+        {
+            return this.rigsRepository.All()
+                .FirstOrDefault(r => r.Id == rigId)
+                .OwnerId;
+        }
+
         public async Task UpdateAsync(int id, EditRigInputModel input)
         {
             var rig = this.rigsRepository.All()

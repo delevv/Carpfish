@@ -82,15 +82,30 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public IActionResult ById(int id)
         {
             var viewModel = this.trophiesService.GetById<TrophyByIdViewModel>(id);
+
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
+
             return this.View(viewModel);
         }
 
         [Authorize]
         public IActionResult Edit(int id)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var trophyOwnerId = this.trophiesService.GetTrophyOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != trophyOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             var inputModel = this.trophiesService.GetById<EditTrophyInputModel>(id);
             inputModel.LakesItems = this.lakesService.GetAllAsKeyValuePairs();
             inputModel.RigsItems = this.rigsService.GetAllAsKeyValuePairs();
@@ -102,6 +117,16 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id, EditTrophyInputModel input)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var trophyOwnerId = this.trophiesService.GetTrophyOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != trophyOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             if (!this.ModelState.IsValid)
             {
                 input.LakesItems = this.lakesService.GetAllAsKeyValuePairs();
@@ -119,6 +144,16 @@
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var trophyOwnerId = this.trophiesService.GetTrophyOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != trophyOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             await this.trophiesService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));

@@ -47,8 +47,7 @@
                 return this.View(input);
             }
 
-            // TODO: Redirect to rig byid page
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult All(int id = 1)
@@ -72,12 +71,26 @@
         public IActionResult ById(int id)
         {
             var viewModel = this.rigsService.GetById<RigByIdViewModel>(id);
+
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
+
             return this.View(viewModel);
         }
 
         [Authorize]
         public IActionResult Edit(int id)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var rigOwnerId = this.rigsService.GetRigOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != rigOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             var inputModel = this.rigsService.GetById<EditRigInputModel>(id);
 
             return this.View(inputModel);
@@ -87,6 +100,16 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id, EditRigInputModel input)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var rigOwnerId = this.rigsService.GetRigOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != rigOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
@@ -101,6 +124,16 @@
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var rigOwnerId = this.rigsService.GetRigOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != rigOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
             await this.rigsService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));

@@ -17,6 +17,8 @@
 
         int GetCount();
 
+        string GetLakeOwnerId(int lakeId);
+
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         Task UpdateAsync(int id, EditLakeInputModel input);

@@ -113,6 +113,13 @@
                 .ToList();
         }
 
+        public string GetTrophyOwnerId(int trophyId)
+        {
+            return this.trophiesRepository.All()
+                .FirstOrDefault(t => t.Id == trophyId)
+                .OwnerId;
+        }
+
         public async Task UpdateAsync(int id, EditTrophyInputModel input)
         {
             var trophy = this.trophiesRepository.All()

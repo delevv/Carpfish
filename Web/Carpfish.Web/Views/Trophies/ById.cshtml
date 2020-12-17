@@ -1,17 +1,23 @@
-﻿@model Carpfish.Web.ViewModels.Trophies.TrophyByIdViewModel
+﻿@using Carpfish.Common
+@model Carpfish.Web.ViewModels.Trophies.TrophyByIdViewModel
 @{
     this.ViewData["Title"] = "Trophy Info";
 }
 
-<div class="row mb-2 justify-content-end">
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+@if (this.User.Identity.IsAuthenticated &&
+  this.Model.IsUserCreator
+  || this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <div class="row mb-2 justify-content-end">
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        </div>
+        <div>
+            <form method="post" asp-action="Delete" asp-route-id="@Model.Id" id="deleteForm"></form>
+            <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
     </div>
-    <div>
-        <form method="post" asp-action="Delete" asp-route-id="@Model.Id" id="deleteForm"></form>
-        <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">Delete</button>
-    </div>
-</div>
+}
 
 <!--Carousel Wrapper-->
 <div id="carousel-trophy" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
