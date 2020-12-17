@@ -72,6 +72,15 @@
             await this.rigsRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var rig = this.rigsRepository.All()
+                 .FirstOrDefault(t => t.Id == id);
+
+            this.rigsRepository.Delete(rig);
+            await this.rigsRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             return this.rigsRepository.AllAsNoTracking()

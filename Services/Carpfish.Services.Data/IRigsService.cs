@@ -20,5 +20,7 @@
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         Task UpdateAsync(int id, EditRigInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }
