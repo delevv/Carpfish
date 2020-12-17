@@ -18,5 +18,7 @@
         int GetCount();
 
         Task UpdateAsync(int id, EditTrophyInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }

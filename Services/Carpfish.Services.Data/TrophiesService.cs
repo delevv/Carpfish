@@ -72,6 +72,15 @@
             await this.trophiesRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var trophy = this.trophiesRepository.All()
+                 .FirstOrDefault(t => t.Id == id);
+
+            this.trophiesRepository.Delete(trophy);
+            await this.trophiesRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             return this.trophiesRepository.AllAsNoTracking()
