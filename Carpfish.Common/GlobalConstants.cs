@@ -66,5 +66,10 @@
 
         // RigsController/All
         public const int RigsCountPerPage = 6;
+
+        // Data seeding
+        public const string AdminName = "admin@admin.bg";
+        public const string AdminEmail = "admin@admin.bg";
+        public const string AdminPass = "admin123456";
     }
 }
