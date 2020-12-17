@@ -83,5 +83,30 @@
             var viewModel = this.lakesService.GetById<LakeByIdViewModel>(id);
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.lakesService.GetById<EditLakeInputModel>(id);
+            inputModel.CountriesItems = this.countriesService.GetAllAsKeyValuePairs();
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditLakeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.CountriesItems = this.countriesService.GetAllAsKeyValuePairs();
+
+                return this.View(input);
+            }
+
+            await this.lakesService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
     }
 }

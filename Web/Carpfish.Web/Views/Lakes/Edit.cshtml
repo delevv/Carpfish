@@ -1,0 +1,65 @@
+﻿@model Carpfish.Web.ViewModels.Lakes.EditLakeInputModel
+@{
+    this.ViewData["Title"] = "Edit Lake";
+    var countriesItems = this.Model.CountriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<form method="post" id="editForm" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" asp-items="countriesItems" class="form-control"></select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Area"></label>
+        <input asp-for="Area" type="number" class="form-control" />
+        <span asp-validation-for="Area" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WebsiteUrl"></label>
+        <input asp-for="WebsiteUrl" class="form-control" />
+        <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="radio" asp-for="IsFree" value="True" /> Free
+        </label>
+        <label>
+            <input type="radio" asp-for="IsFree" value="False" /> Paid
+        </label>
+    </div>
+    <input type="hidden" asp-for="Id" />
+</form>
+
+<div class="text-center">
+    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Save changes</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you confirm this changes ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

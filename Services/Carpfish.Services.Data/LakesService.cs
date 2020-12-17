@@ -130,5 +130,19 @@
         {
             return this.lakeRepository.All().Count();
         }
+
+        public async Task UpdateAsync(int id, EditLakeInputModel input)
+        {
+            var lake = this.lakeRepository.All()
+                .FirstOrDefault(r => r.Id == id);
+
+            lake.IsFree = input.IsFree;
+            lake.Name = input.Name;
+            lake.WebsiteUrl = input.WebsiteUrl;
+            lake.Area = input.Area;
+            lake.CountryId = input.CountryId;
+
+            await this.lakeRepository.SaveChangesAsync();
+        }
     }
 }
