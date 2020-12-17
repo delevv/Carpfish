@@ -1,0 +1,62 @@
+﻿@model Carpfish.Web.ViewModels.Trophies.EditTrophyInputModel
+@{
+    this.ViewData["Title"] = "Edit Trophy";
+    var lakesItems = this.Model.LakesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var rigsItems = this.Model.RigsItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<form method="post" id="editForm" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BaitDescription"></label>
+        <input asp-for="BaitDescription" class="form-control"></input>
+        <span asp-validation-for="BaitDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LakeId"></label>
+        <select asp-for="LakeId" asp-items="lakesItems" class="form-control"></select>
+        <span asp-validation-for="LakeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RigId"></label>
+        <select asp-for="RigId" asp-items="rigsItems" class="form-control">
+            <option selected></option>
+        </select>
+        <span asp-validation-for="RigId" class="text-danger"></span>
+    </div>
+    <hr />
+    <div class="text-center form">
+        <input type="hidden" asp-for="Id" />
+    </div>
+</form>
+
+<div class="text-center">
+    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Save changes</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you confirm this changes ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

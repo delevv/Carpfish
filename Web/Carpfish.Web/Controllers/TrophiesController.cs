@@ -61,7 +61,6 @@
                 return this.View(input);
             }
 
-            // TODO: Redirect to lake info page
             return this.RedirectToAction("All");
         }
 
@@ -87,6 +86,33 @@
         {
             var viewModel = this.trophiesService.GetById<TrophyByIdViewModel>(id);
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.trophiesService.GetById<EditTrophyInputModel>(id);
+            inputModel.LakesItems = this.lakesService.GetAllAsKeyValuePairs();
+            inputModel.RigsItems = this.rigsService.GetAllAsKeyValuePairs();
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditTrophyInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.LakesItems = this.lakesService.GetAllAsKeyValuePairs();
+                input.RigsItems = this.rigsService.GetAllAsKeyValuePairs();
+
+                return this.View(input);
+            }
+
+            await this.trophiesService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ById), new { id });
         }
     }
 }

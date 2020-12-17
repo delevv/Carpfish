@@ -103,5 +103,18 @@
                 .To<T>()
                 .ToList();
         }
+
+        public async Task UpdateAsync(int id, EditTrophyInputModel input)
+        {
+            var trophy = this.trophiesRepository.All()
+                 .FirstOrDefault(r => r.Id == id);
+
+            trophy.LakeId = input.LakeId;
+            trophy.RigId = input.RigId;
+            trophy.BaitDescription = input.BaitDescription;
+            trophy.Weight = input.Weight;
+
+            await this.trophiesRepository.SaveChangesAsync();
+        }
     }
 }
