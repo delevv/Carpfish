@@ -74,5 +74,27 @@
             var viewModel = this.rigsService.GetById<RigByIdViewModel>(id);
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.rigsService.GetById<EditRigInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditRigInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.rigsService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
     }
 }
