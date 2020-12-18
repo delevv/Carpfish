@@ -1,6 +1,5 @@
 ﻿namespace Carpfish.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -45,7 +44,6 @@
                 Longitude = input.Location.Longitude,
             };
 
-            // TODO: Validate Image
             var mainImgUrl = await this.cloudinaryService.UploadAsync(input.MainImage, input.MainImage.FileName);
 
             var mainImg = new Image()
@@ -120,14 +118,19 @@
 
             if (type == "Free")
             {
-                query.Where(l => l.IsFree);
+                query = query.Where(l => l.IsFree);
+            }
+
+            if (type == "Paid")
+            {
+                query = query.Where(l => !l.IsFree);
             }
 
             return query
-                 .Skip((page - 1) * itemsPerPage)
-                 .Take(itemsPerPage)
-                 .To<T>()
-                 .ToList();
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToList();
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
@@ -157,11 +160,21 @@
             return this.lakeRepository.All().Count();
         }
 
+        public int GetFreeLakesCount()
+        {
+            return this.lakeRepository.All().Where(l => l.IsFree).Count();
+        }
+
         public string GetLakeOwnerId(int lakeId)
         {
             return this.lakeRepository.All()
                 .FirstOrDefault(l => l.Id == lakeId)
                 .OwnerId;
+        }
+
+        public int GetPaidLakesCount()
+        {
+            return this.lakeRepository.All().Where(l => !l.IsFree).Count();
         }
 
         public async Task UpdateAsync(int id, EditLakeInputModel input)

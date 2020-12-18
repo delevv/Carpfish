@@ -67,21 +67,38 @@
                 return this.NotFound();
             }
 
-            IEnumerable<LakeInListViewModel> lakes;
+            var lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
+            var lakesCount = this.lakesService.GetCount();
 
-            if (type == null)
+            if (type != null)
             {
-                lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
-            }
-            else
-            {
-                lakes = this.lakesService.GetAll<LakeInListViewModel>(type, id, GlobalConstants.LakesCountPerPage);
+                id = 1;
+
+                if (type == "All")
+                {
+                    lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
+                    lakesCount = this.lakesService.GetCount();
+                }
+                else
+                {
+                    lakes = this.lakesService.GetAll<LakeInListViewModel>(type, id, GlobalConstants.LakesCountPerPage);
+
+                    if (type == "Free")
+                    {
+                        lakesCount = this.lakesService.GetFreeLakesCount();
+                    }
+                    else
+                    {
+                        lakesCount = this.lakesService.GetPaidLakesCount();
+                    }
+                }
+
             }
 
             var viewModel = new LakesListViewModel()
             {
                 ItemsPerPage = GlobalConstants.LakesCountPerPage,
-                ItemsCount = this.lakesService.GetCount(),
+                ItemsCount = lakesCount,
                 PageNumber = id,
                 Lakes = lakes,
                 currStatus = type,

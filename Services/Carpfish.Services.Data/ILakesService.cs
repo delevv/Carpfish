@@ -19,6 +19,10 @@
 
         int GetCount();
 
+        int GetFreeLakesCount();
+
+        int GetPaidLakesCount();
+
         string GetLakeOwnerId(int lakeId);
 
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();

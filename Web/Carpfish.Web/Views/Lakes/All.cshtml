@@ -3,14 +3,12 @@
     this.ViewData["Title"] = "All Lakes";
 }
 
-<div class="row justify-content-center mb-3">
+<div class="row text-center mb-3">
     <!-- Example single danger button -->
-    <div class="col-sm">
+    <div class="col-3">
         <select class="custom-select custom-select-sm">
-            @if (Model.currStatus == "" || Model.currStatus == null)
-            {
-                <option selected>Statute</option>
-            }
+            <option selected>All</option>
+           
             @foreach (var type in Model.statusTypes)
             {
                 @if (Model.currStatus == type)
@@ -24,8 +22,8 @@
             }
         </select>
     </div>
-    <div class="col-sm">
-        <a asp-action="Add"><input class="btn btn-primary" value="Add Lake" /></a>
+    <div class="col-1">
+        <a asp-action="Add"><input class="btn btn-primary btn-sm" value="Add Lake" /></a>
     </div>
 </div>
 <div class="row">
@@ -53,7 +51,7 @@
                         <span class="ml-2">@lake.AverageRating.ToString("f1")</span>
                     </div>
                     <div class="text-center">
-                        <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-primary mt-2">Show More</a>
+                        <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-success mt-2">Show More</a>
                     </div>
                 </div>
             </div>

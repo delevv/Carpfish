@@ -33,7 +33,6 @@
                 OwnerId = userId,
             };
 
-            // TODO: Validate Image
             var mainImgUrl = await this.cloudinaryService.UploadAsync(input.MainImage, input.MainImage.FileName);
 
             var mainImg = new Image()
@@ -52,7 +51,6 @@
             {
                 foreach (var img in input.OtherImages)
                 {
-                    // TODO: Validate Image
                     var currImgUrl = await this.cloudinaryService.UploadAsync(img, img.FileName);
 
                     var currImg = new Image()

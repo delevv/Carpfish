@@ -31,7 +31,6 @@
                 OwnerId = userId,
             };
 
-            // TODO: Validate Image
             var rigImgUrl = await this.cloudinaryService.UploadAsync(input.Image, input.Image.FileName);
 
             rig.Image = new Image
@@ -52,7 +51,6 @@
 
             for (int i = 0; i < input.Steps.Count(); i++)
             {
-                // TODO: Validate Image
                 var stepImgUrl = await this.cloudinaryService.UploadAsync(input.Steps[i].Image, input.Steps[i].Image.FileName);
 
                 rig.Steps.Add(new Step
