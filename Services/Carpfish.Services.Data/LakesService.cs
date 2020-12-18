@@ -86,6 +86,15 @@
             await this.lakeImagesRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var lake = this.lakeRepository.All()
+                .FirstOrDefault(l => l.Id == id);
+
+            this.lakeRepository.Delete(lake);
+            await this.lakeRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             return this.lakeRepository.All()

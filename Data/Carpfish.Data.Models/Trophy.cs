@@ -26,7 +26,7 @@
 
         public virtual ApplicationUser Owner { get; set; }
 
-        public int LakeId { get; set; }
+        public int? LakeId { get; set; }
 
         public virtual Lake Lake { get; set; }
 

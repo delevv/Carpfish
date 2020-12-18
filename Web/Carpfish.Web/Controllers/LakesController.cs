@@ -87,7 +87,6 @@
                 viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
             }
 
-
             return this.View(viewModel);
         }
 
@@ -134,6 +133,25 @@
             await this.lakesService.UpdateAsync(id, input);
 
             return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var lakeOwnerId = this.lakesService.GetLakeOwnerId(id);
+
+            var isAdministrator = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+
+            if (currentUserId != lakeOwnerId && !isAdministrator)
+            {
+                return this.NotFound();
+            }
+
+            await this.lakesService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

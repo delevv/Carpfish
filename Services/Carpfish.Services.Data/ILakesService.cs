@@ -22,5 +22,7 @@
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         Task UpdateAsync(int id, EditLakeInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }
