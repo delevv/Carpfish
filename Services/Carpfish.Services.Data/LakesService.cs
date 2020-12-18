@@ -8,22 +8,18 @@
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
     using Carpfish.Web.ViewModels.Lakes;
-    using Microsoft.EntityFrameworkCore;
 
     public class LakesService : ILakesService
     {
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<Lake> lakeRepository;
-        private readonly IDeletableEntityRepository<LakeImage> lakeImagesRepository;
 
         public LakesService(
             ICloudinaryService cloudinaryService,
-            IDeletableEntityRepository<Lake> lakeRepository,
-            IDeletableEntityRepository<LakeImage> lakeImagesRepository)
+            IDeletableEntityRepository<Lake> lakeRepository)
         {
             this.cloudinaryService = cloudinaryService;
             this.lakeRepository = lakeRepository;
-            this.lakeImagesRepository = lakeImagesRepository;
         }
 
         public async Task AddAsync(AddLakeInputModel input, string userId)
@@ -52,10 +48,9 @@
                 Url = mainImgUrl,
             };
 
-            await this.lakeImagesRepository.AddAsync(new LakeImage()
+            lake.LakeImages.Add(new LakeImage()
             {
                 Image = mainImg,
-                Lake = lake,
                 IsMain = true,
             });
 
@@ -71,18 +66,15 @@
                         Url = currImgUrl,
                     };
 
-                    await this.lakeImagesRepository.AddAsync(new LakeImage()
+                    lake.LakeImages.Add(new LakeImage()
                     {
                         Image = currImg,
-                        Lake = lake,
                     });
                 }
             }
 
             await this.lakeRepository.AddAsync(lake);
-
             await this.lakeRepository.SaveChangesAsync();
-            await this.lakeImagesRepository.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -136,7 +128,7 @@
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
         {
             return this.lakeRepository
-                .AllAsNoTracking()
+                .All()
                 .Select(x => new
                 {
                     x.Id,
