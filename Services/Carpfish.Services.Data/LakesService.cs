@@ -9,6 +9,7 @@
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
     using Carpfish.Web.ViewModels.Lakes;
+    using Microsoft.EntityFrameworkCore;
 
     public class LakesService : ILakesService
     {
@@ -109,6 +110,22 @@
         {
             return this.lakeRepository.All()
                  .OrderByDescending(l => l.Id)
+                 .To<T>()
+                 .ToList();
+        }
+
+        public IEnumerable<T> GetAll<T>(string type, int page, int itemsPerPage)
+        {
+            var query = this.lakeRepository.All().AsQueryable();
+
+            if (type == "Free")
+            {
+                query.Where(l => l.IsFree);
+            }
+
+            return query
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
                  .To<T>()
                  .ToList();
         }

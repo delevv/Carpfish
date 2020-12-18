@@ -1,6 +1,7 @@
 ﻿namespace Carpfish.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -59,11 +60,22 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All(int id = 1)
+        public IActionResult All(string type, int id = 1)
         {
             if (id <= 0)
             {
                 return this.NotFound();
+            }
+
+            IEnumerable<LakeInListViewModel> lakes;
+
+            if (type == null)
+            {
+                lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
+            }
+            else
+            {
+                lakes = this.lakesService.GetAll<LakeInListViewModel>(type, id, GlobalConstants.LakesCountPerPage);
             }
 
             var viewModel = new LakesListViewModel()
@@ -71,7 +83,9 @@
                 ItemsPerPage = GlobalConstants.LakesCountPerPage,
                 ItemsCount = this.lakesService.GetCount(),
                 PageNumber = id,
-                Lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage),
+                Lakes = lakes,
+                currStatus = type,
+                statusTypes = new string[] { "Free", "Paid" },
             };
 
             return this.View(viewModel);

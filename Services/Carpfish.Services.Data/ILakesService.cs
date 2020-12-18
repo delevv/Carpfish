@@ -7,9 +7,11 @@
 
     public interface ILakesService
     {
+        IEnumerable<T> GetAll<T>();
+
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(string type, int page, int itemsPerPage);
 
         Task AddAsync(AddLakeInputModel input, string userId);
 

@@ -4,7 +4,29 @@
 }
 
 <div class="row justify-content-center mb-3">
-    <a asp-action="Add"><input class="btn btn-primary" value="Add Lake" /></a>
+    <!-- Example single danger button -->
+    <div class="col-sm">
+        <select class="custom-select custom-select-sm">
+            @if (Model.currStatus == "" || Model.currStatus == null)
+            {
+                <option selected>Statute</option>
+            }
+            @foreach (var type in Model.statusTypes)
+            {
+                @if (Model.currStatus == type)
+                {
+                    <option selected>@type</option>
+                }
+                else
+                {
+                    <option>@type</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-sm">
+        <a asp-action="Add"><input class="btn btn-primary" value="Add Lake" /></a>
+    </div>
 </div>
 <div class="row">
     @foreach (var lake in this.Model.Lakes)
@@ -40,3 +62,15 @@
 </div>
 <hr />
 <partial name="_PagingPartial" model="@Model" />
+
+@section Scripts{
+    <script>
+        $('.custom-select').change(function (e) {
+            e.preventDefault();
+            var type = $(this).val();
+            window.location.href = window.location.pathname + '?type=' + type;
+
+            console.log(window.location.pathname)
+        });
+    </script>
+}
