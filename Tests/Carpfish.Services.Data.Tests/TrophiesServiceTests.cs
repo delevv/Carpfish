@@ -155,8 +155,6 @@
             var service = new TrophiesService(null, repository.Object);
 
             Assert.Equal(3, service.GetCount());
-
-            repository.Verify(x => x.All(), Times.Once);
         }
 
         [Fact]
@@ -192,17 +190,12 @@
         }
 
         [Fact]
-        public void GetLakeOwnerIdShouldWorkCorrectly()
+        public void GetTrophyOwnerIdShouldWorkCorrectly()
         {
             var trophiesList = new List<Trophy>()
             {
                 new Trophy { Id = 1, OwnerId = "asdas123" },
             };
-
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
-
-            using var db = new ApplicationDbContext(options);
 
             var repository = new Mock<IDeletableEntityRepository<Trophy>>();
             repository.Setup(r => r.All()).Returns(trophiesList.AsQueryable());

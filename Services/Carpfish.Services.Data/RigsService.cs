@@ -81,7 +81,7 @@
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
-            return this.rigsRepository.AllAsNoTracking()
+            return this.rigsRepository.All()
                 .OrderByDescending(r => r.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
