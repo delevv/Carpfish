@@ -82,13 +82,15 @@
             return this.View(viewModel);
         }
 
-        [Authorize]
         public IActionResult ById(int id)
         {
             var viewModel = this.trophiesService.GetById<TrophyByIdViewModel>(id);
 
-            var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
+            if (this.User.Identity.IsAuthenticated)
+            {
+                var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                viewModel.IsUserCreator = currentUserId == viewModel.OwnerId;
+            }
 
             return this.View(viewModel);
         }
