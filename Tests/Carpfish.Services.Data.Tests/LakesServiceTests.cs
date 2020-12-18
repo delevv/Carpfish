@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Carpfish.Data;
@@ -16,7 +15,6 @@
     using Carpfish.Web.ViewModels.Location;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Primitives;
     using Moq;
     using Xunit;
 
@@ -25,14 +23,16 @@
         [Fact]
         public void GetCountShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake(),
+                new Lake(),
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
 
@@ -42,21 +42,13 @@
         [Fact]
         public void GetByIdShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake { Id = 1, Name = "Test" },
+                new Lake { Id = 22, Name = "Test22" },
+            };
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake
-                                                                {
-                                                                Id = 1,
-                                                                Name = "Test",
-                                                                },
-                                                            new Lake
-                                                               {
-                                                                Id = 22,
-                                                                Name = "Test22",
-                                                               },
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
             AutoMapperConfig.RegisterMappings(typeof(LakeModel).Assembly);
@@ -71,13 +63,15 @@
         [Fact]
         public void GetAllWithoutParametersShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake(),
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
             AutoMapperConfig.RegisterMappings(typeof(LakeModel).Assembly);
@@ -88,13 +82,15 @@
         [Fact]
         public void GetAllWithTwoParametersShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake(),
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
             AutoMapperConfig.RegisterMappings(typeof(LakeModel).Assembly);
@@ -105,19 +101,15 @@
         [Fact]
         public void GetFreeLakesCountShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake { IsFree = true },
+                new Lake { IsFree = true },
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake
-                                                            {
-                                                                IsFree = true,
-                                                            },
-                                                            new Lake(),
-                                                            new Lake
-                                                            {
-                                                                IsFree = true,
-                                                            },
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
 
@@ -127,16 +119,15 @@
         [Fact]
         public void GetPaidLakesCountShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake { IsFree = true },
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake
-                                                            {
-                                                                IsFree = true,
-                                                            },
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
 
@@ -146,13 +137,15 @@
         [Fact]
         public void GetAllWithThreeParametersFirstOfThemFreeShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake(),
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
             AutoMapperConfig.RegisterMappings(typeof(LakeModel).Assembly);
@@ -163,13 +156,15 @@
         [Fact]
         public void GetAllWithThreeParametersFirstOfThemPaidShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake(),
+                new Lake(),
+                new Lake(),
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake(),
-                                                            new Lake(),
-                                                            new Lake(),
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
             AutoMapperConfig.RegisterMappings(typeof(LakeModel).Assembly);
@@ -180,25 +175,15 @@
         [Fact]
         public void GetAllAsKeyValuePairsShouldWorkCorrect()
         {
+            var lakesList = new List<Lake>
+            {
+                new Lake { Id = 1, Name = "test1" },
+                new Lake { Id = 2, Name = "test2" },
+                new Lake { Id = 3, Name = "test3" },
+            };
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake
-                                                            {
-                                                                Id = 1,
-                                                                Name = "test1",
-                                                            },
-                                                            new Lake
-                                                            {
-                                                                Id = 2,
-                                                                Name = "test2",
-                                                            },
-                                                            new Lake
-                                                            {
-                                                                Id = 3,
-                                                                Name = "test3",
-                                                            },
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakesList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
 
@@ -215,16 +200,18 @@
         [Fact]
         public void GetLakeOwnerIdShouldWorkCorrectly()
         {
+            var lakeList = new List<Lake>()
+            {
+                new Lake { Id = 1, Name = "test1", OwnerId = "asdas123" },
+            };
+
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            using var db = new ApplicationDbContext(options);
+
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
-            repository.Setup(r => r.All()).Returns(new List<Lake>
-                                                        {
-                                                            new Lake
-                                                            {
-                                                                Id = 1,
-                                                                Name = "test1",
-                                                                OwnerId = "asdas123",
-                                                            },
-                                                        }.AsQueryable());
+            repository.Setup(r => r.All()).Returns(lakeList.AsQueryable());
 
             var service = new LakesService(null, repository.Object);
 
@@ -244,20 +231,9 @@
 
             var service = new LakesService(null, lakeRepository);
 
-            await lakeRepository.AddAsync(new Lake
-            {
-                Id = 1,
-            });
-
-            await lakeRepository.AddAsync(new Lake
-            {
-                Id = 2,
-            });
-
-            await lakeRepository.AddAsync(new Lake
-            {
-                Id = 3,
-            });
+            await lakeRepository.AddAsync(new Lake { Id = 1 });
+            await lakeRepository.AddAsync(new Lake { Id = 2 });
+            await lakeRepository.AddAsync(new Lake { Id = 3 });
 
             await lakeRepository.SaveChangesAsync();
 

@@ -81,7 +81,7 @@
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
-            return this.trophiesRepository.AllAsNoTracking()
+            return this.trophiesRepository.All()
                 .OrderByDescending(l => l.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
