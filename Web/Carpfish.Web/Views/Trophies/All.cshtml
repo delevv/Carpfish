@@ -3,12 +3,11 @@
     this.ViewData["Title"] = "Throphies All";
 }
 
-<h1>@this.ViewData["Title"]</h1>
 <div class="row justify-content-center">
     <a asp-action="Add"><input class="btn btn-primary" value="Add Trophy" /></a>
 </div>
 
-<div class="row mt-5">
+<div class="row mt-3">
     @foreach (var trophy in Model.Trophies)
     {
         <div class="card mb-3 col-sm-6">

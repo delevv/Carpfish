@@ -65,7 +65,7 @@
         public const int TrophiesCountPerPage = 6;
 
         // RigsController/All
-        public const int RigsCountPerPage = 6;
+        public const int RigsCountPerPage = 4;
 
         // Data seeding
         public const string AdminName = "admin@admin.bg";
