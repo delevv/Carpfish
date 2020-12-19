@@ -18,7 +18,7 @@
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
         {
             return this.countriesRepository
-                .AllAsNoTracking()
+                .All()
                 .Select(x => new
                 {
                     x.Id,
