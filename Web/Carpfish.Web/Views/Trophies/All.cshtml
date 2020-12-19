@@ -23,14 +23,17 @@
                             <span class="card-text ml-2">@trophy.Weight.ToString("f3")</span>
                         </span>
                         <hr />
-                        <div>
-                            <i class="fas fa-water text-success"></i>
-                            <a class="card-link"
-                               asp-controller="Lakes"
-                               asp-action="ById"
-                               asp-route-id="@trophy.LakeId">@trophy.LakeName</a>
-                        </div>
-                        <hr />
+                        @if (trophy.LakeId != null)
+                        {
+                            <div>
+                                <i class="fas fa-water text-success"></i>
+                                <a class="card-link"
+                                   asp-controller="Lakes"
+                                   asp-action="ById"
+                                   asp-route-id="@trophy.LakeId">@trophy.LakeName</a>
+                            </div>
+                            <hr />
+                        }
                         <span>
                             <i class="fas fa-user text-info"></i>
                             <span class="card-text ml-2">@trophy.OwnerUserName</span>

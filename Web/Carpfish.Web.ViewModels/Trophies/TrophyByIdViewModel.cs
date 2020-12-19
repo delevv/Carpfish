@@ -21,7 +21,7 @@
 
         public string OwnerUserName { get; set; }
 
-        public int LakeId { get; set; }
+        public int? LakeId { get; set; }
 
         public int? RigId { get; set; }
 

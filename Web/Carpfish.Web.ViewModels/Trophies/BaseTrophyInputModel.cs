@@ -16,7 +16,7 @@
         public string BaitDescription { get; set; }
 
         [Display(Name = "Select Lake")]
-        public int LakeId { get; set; }
+        public int? LakeId { get; set; }
 
         [Display(Name = "Select Rig")]
         public int? RigId { get; set; }

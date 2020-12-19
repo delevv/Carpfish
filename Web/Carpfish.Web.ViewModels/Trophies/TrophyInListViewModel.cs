@@ -17,7 +17,7 @@
 
         public string OwnerUserName { get; set; }
 
-        public int LakeId { get; set; }
+        public int? LakeId { get; set; }
 
         public string LakeName { get; set; }
 
