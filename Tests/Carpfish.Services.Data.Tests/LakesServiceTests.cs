@@ -205,11 +205,6 @@
                 new Lake { Id = 1, Name = "test1", OwnerId = "asdas123" },
             };
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
-
-            using var db = new ApplicationDbContext(options);
-
             var repository = new Mock<IDeletableEntityRepository<Lake>>();
             repository.Setup(r => r.All()).Returns(lakeList.AsQueryable());
 
