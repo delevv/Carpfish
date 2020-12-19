@@ -1,16 +1,15 @@
-﻿using Carpfish.Data;
-using Carpfish.Data.Models;
-using Carpfish.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace Carpfish.Services.Data.Tests
+﻿namespace Carpfish.Services.Data.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Carpfish.Data;
+    using Carpfish.Data.Models;
+    using Carpfish.Data.Repositories;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class CountriesServiceTests
     {
         [Fact]

@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Carpfish.Data\Carpfish.Data.csproj" />
     <ProjectReference Include="..\..\Services\Carpfish.Services.Data\Carpfish.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\Carpfish.Web\Carpfish.Web.csproj" />
   </ItemGroup>
 
 </Project>
