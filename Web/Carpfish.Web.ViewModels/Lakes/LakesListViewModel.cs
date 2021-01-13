@@ -6,8 +6,14 @@
     {
         public IEnumerable<LakeInListViewModel> Lakes { get; set; }
 
-        public IEnumerable<string> statusTypes { get; set; }
+        public IEnumerable<string> StatusTypes { get; set; }
 
-        public string currStatus { get; set; }
+        public string CurrStatus { get; set; }
+
+        public IEnumerable<string> OrderTypes { get; set; }
+
+        public string CurrOrder { get; set; }
+
+        public string Search { get; set; }
     }
 }

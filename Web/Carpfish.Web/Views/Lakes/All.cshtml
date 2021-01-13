@@ -4,14 +4,11 @@
 }
 
 <div class="row text-center mb-3">
-    <!-- Example single danger button -->
-    <div class="col-3">
-        <select class="custom-select custom-select-sm">
-            <option selected>All</option>
-           
-            @foreach (var type in Model.statusTypes)
+    <div class="col-md">
+        <select id="type" class="custom-select form-control">
+            @foreach (var type in Model.StatusTypes)
             {
-                @if (Model.currStatus == type)
+                @if (Model.CurrStatus == type)
                 {
                     <option selected>@type</option>
                 }
@@ -22,8 +19,27 @@
             }
         </select>
     </div>
-    <div class="col-1">
-        <a asp-action="Add"><input class="btn btn-primary btn-sm" value="Add Lake" /></a>
+    <div class="col-md">
+        <select id="order" class="custom-select form-control">
+            @foreach (var type in Model.OrderTypes)
+            {
+                @if (Model.CurrOrder == type)
+                {
+                    <option selected>@type</option>
+                }
+                else
+                {
+                    <option>@type</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md input-group">
+        <input id="searchInput" asp-for="Search" class="form-control" type="search" placeholder="Search" aria-label="Search" value="@Model.Search">
+        <button id="search" class="btn btn-outline-success input-group-append"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="col-md">
+        <a asp-action="Add"><input class="btn btn-primary btn-md" value="Add Lake" /></a>
     </div>
 </div>
 <div class="row">
@@ -65,10 +81,27 @@
     <script>
         $('.custom-select').change(function (e) {
             e.preventDefault();
-            var type = $(this).val();
-            window.location.href = window.location.pathname + '?type=' + type;
+            var type = $('#type').val();
+            var order = $('#order').val();
+            var search = $('#searchInput').val();
+            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}`;
+        });
 
-            console.log(window.location.pathname)
+        $('#search').click(function (e) {
+            e.preventDefault();
+            var type = $('#type').val();
+            var order = $('#order').val();
+            var search = $('#searchInput').val();
+            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}`;
+        });
+
+        $('.page-link').click(function () {
+            e.preventDefault();
+            var type = $('#type').val();
+            var order = $('#order').val();
+            var search = $('#searchInput').val();
+            var page = $(this).val();
+            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}&&page=${page}`;
         });
     </script>
 }

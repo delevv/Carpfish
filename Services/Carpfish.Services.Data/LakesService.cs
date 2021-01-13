@@ -104,25 +104,50 @@
                  .ToList();
         }
 
-        public IEnumerable<T> GetAll<T>(string type, int page, int itemsPerPage)
+        public IEnumerable<T> GetAll<T>(LakesAllInputModel input)
         {
             var query = this.lakeRepository.All().AsQueryable();
 
-            if (type == "Free")
+            if (input.Type == "Free")
             {
                 query = query.Where(l => l.IsFree);
             }
 
-            if (type == "Paid")
+            if (input.Type == "Paid")
             {
                 query = query.Where(l => !l.IsFree);
             }
 
+            if (input.Order == "Rating ASC")
+            {
+                query = query.OrderBy(x => x.LakeVotes.Average(lv => lv.Vote.Value));
+            }
+
+            if (input.Order == "Rating DESC")
+            {
+                query = query.OrderByDescending(x => x.LakeVotes.Average(lv => lv.Vote.Value));
+            }
+
+            if (input.Order == "Trophies Count ASC")
+            {
+                query = query.OrderBy(x => x.Trophies.Count());
+            }
+
+            if (input.Order == "Trophies Count DESC")
+            {
+                query = query.OrderByDescending(x => x.Trophies.Count());
+            }
+
+            if (!string.IsNullOrEmpty(input.Search))
+            {
+                query = query.Where(l => l.Name.ToLower().Contains(input.Search.ToLower()));
+            }
+
             return query
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .To<T>()
-                .ToList();
+                    .Skip((input.Page - 1) * input.ItemsPerPage)
+                    .Take(input.ItemsPerPage)
+                    .To<T>()
+                    .ToList();
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
@@ -152,9 +177,12 @@
             return this.lakeRepository.All().Count();
         }
 
-        public int GetFreeLakesCount()
+        public int GetCount(LakesAllInputModel input)
         {
-            return this.lakeRepository.All().Where(l => l.IsFree).Count();
+            var query = this.lakeRepository.All().AsQueryable();
+            query = this.AddFilters(query, input);
+
+            return query.ToList().Count();
         }
 
         public string GetLakeOwnerId(int lakeId)
@@ -162,11 +190,6 @@
             return this.lakeRepository.All()
                 .FirstOrDefault(l => l.Id == lakeId)
                 .OwnerId;
-        }
-
-        public int GetPaidLakesCount()
-        {
-            return this.lakeRepository.All().Where(l => !l.IsFree).Count();
         }
 
         public async Task UpdateAsync(int id, EditLakeInputModel input)
@@ -181,6 +204,46 @@
             lake.CountryId = input.CountryId;
 
             await this.lakeRepository.SaveChangesAsync();
+        }
+
+        private IQueryable<Lake> AddFilters(IQueryable<Lake> query, LakesAllInputModel input)
+        {
+            if (input.Type == "Free")
+            {
+                query = query.Where(l => l.IsFree);
+            }
+
+            if (input.Type == "Paid")
+            {
+                query = query.Where(l => !l.IsFree);
+            }
+
+            if (input.Order == "Rating ASC")
+            {
+                query = query.OrderBy(x => x.LakeVotes.Average(lv => lv.Vote.Value));
+            }
+
+            if (input.Order == "Rating DESC")
+            {
+                query = query.OrderByDescending(x => x.LakeVotes.Average(lv => lv.Vote.Value));
+            }
+
+            if (input.Order == "Trophies Count ASC")
+            {
+                query = query.OrderBy(x => x.Trophies.Count());
+            }
+
+            if (input.Order == "Trophies Count DESC")
+            {
+                query = query.OrderByDescending(x => x.Trophies.Count());
+            }
+
+            if (!string.IsNullOrEmpty(input.Search))
+            {
+                query = query.Where(l => l.Name.ToLower().Contains(input.Search.ToLower()));
+            }
+
+            return query;
         }
     }
 }

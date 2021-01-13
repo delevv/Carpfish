@@ -11,7 +11,7 @@
 
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
-        IEnumerable<T> GetAll<T>(string type, int page, int itemsPerPage);
+        IEnumerable<T> GetAll<T>(LakesAllInputModel input);
 
         Task AddAsync(AddLakeInputModel input, string userId);
 
@@ -19,9 +19,7 @@
 
         int GetCount();
 
-        int GetFreeLakesCount();
-
-        int GetPaidLakesCount();
+        int GetCount(LakesAllInputModel input);
 
         string GetLakeOwnerId(int lakeId);
 

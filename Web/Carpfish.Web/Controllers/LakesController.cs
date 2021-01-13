@@ -1,6 +1,7 @@
 ﻿namespace Carpfish.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -58,48 +59,29 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All(string type, int id = 1)
+        public IActionResult All(LakesAllInputModel input)
         {
-            if (id <= 0)
+            if (input.Page <= 0)
             {
                 return this.NotFound();
             }
 
-            var lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
-            var lakesCount = this.lakesService.GetCount();
+            input.ItemsPerPage = GlobalConstants.LakesCountPerPage;
 
-            if (type != null)
-            {
-                id = 1;
-
-                if (type == "All")
-                {
-                    lakes = this.lakesService.GetAll<LakeInListViewModel>(id, GlobalConstants.LakesCountPerPage);
-                    lakesCount = this.lakesService.GetCount();
-                }
-                else
-                {
-                    lakes = this.lakesService.GetAll<LakeInListViewModel>(type, id, GlobalConstants.LakesCountPerPage);
-
-                    if (type == "Free")
-                    {
-                        lakesCount = this.lakesService.GetFreeLakesCount();
-                    }
-                    else
-                    {
-                        lakesCount = this.lakesService.GetPaidLakesCount();
-                    }
-                }
-            }
+            var lakes = this.lakesService.GetAll<LakeInListViewModel>(input);
+            var totalLakesCount = this.lakesService.GetCount(input);
 
             var viewModel = new LakesListViewModel()
             {
                 ItemsPerPage = GlobalConstants.LakesCountPerPage,
-                ItemsCount = lakesCount,
-                PageNumber = id,
+                ItemsCount = totalLakesCount,
+                PageNumber = input.Page,
                 Lakes = lakes,
-                currStatus = type,
-                statusTypes = new string[] { "Free", "Paid" },
+                Search = input.Search,
+                CurrStatus = input.Type ?? "Type",
+                StatusTypes = new string[] { "Type", "Free", "Paid" },
+                CurrOrder = input.Order ?? "Order By",
+                OrderTypes = new string[] { "Order By", "Rating ASC", "Rating DESC", "Trophies Count ASC", "Trophies Count DESC" },
             };
 
             return this.View(viewModel);
