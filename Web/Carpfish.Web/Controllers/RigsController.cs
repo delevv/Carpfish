@@ -50,9 +50,9 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All(int id = 1)
+        public IActionResult All(int page = 1)
         {
-            if (id <= 0)
+            if (page <= 0)
             {
                 return this.NotFound();
             }
@@ -61,8 +61,8 @@
             {
                 ItemsPerPage = GlobalConstants.RigsCountPerPage,
                 ItemsCount = this.rigsService.GetCount(),
-                PageNumber = id,
-                Rigs = this.rigsService.GetAll<RigInListViewModel>(id, GlobalConstants.RigsCountPerPage),
+                PageNumber = page,
+                Rigs = this.rigsService.GetAll<RigInListViewModel>(page, GlobalConstants.RigsCountPerPage),
             };
 
             return this.View(viewModel);

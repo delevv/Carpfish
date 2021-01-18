@@ -66,15 +66,24 @@
                 return this.NotFound();
             }
 
-            input.ItemsPerPage = GlobalConstants.LakesCountPerPage;
-
             var lakes = this.lakesService.GetAll<LakeInListViewModel>(input);
-            var totalLakesCount = this.lakesService.GetCount(input);
+
+            var lakesCount = input.Type switch
+            {
+                "Free" => this.lakesService.GetFreeCount(),
+                "Paid" => this.lakesService.GetPaidCount(),
+                _ => this.lakesService.GetCount(),
+            };
+
+            if (!string.IsNullOrEmpty(input.Search))
+            {
+                lakesCount = this.lakesService.GetSearchCount(input.Type, input.Search);
+            }
 
             var viewModel = new LakesListViewModel()
             {
                 ItemsPerPage = GlobalConstants.LakesCountPerPage,
-                ItemsCount = totalLakesCount,
+                ItemsCount = lakesCount,
                 PageNumber = input.Page,
                 Lakes = lakes,
                 Search = input.Search,

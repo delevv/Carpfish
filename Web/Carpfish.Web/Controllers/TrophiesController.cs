@@ -64,9 +64,9 @@
             return this.RedirectToAction("All");
         }
 
-        public IActionResult All(int id = 1)
+        public IActionResult All(int page = 1)
         {
-            if (id <= 0)
+            if (page <= 0)
             {
                 return this.NotFound();
             }
@@ -75,8 +75,8 @@
             {
                 ItemsPerPage = GlobalConstants.TrophiesCountPerPage,
                 ItemsCount = this.trophiesService.GetCount(),
-                PageNumber = id,
-                Trophies = this.trophiesService.GetAll<TrophyInListViewModel>(id, GlobalConstants.TrophiesCountPerPage),
+                PageNumber = page,
+                Trophies = this.trophiesService.GetAll<TrophyInListViewModel>(page, GlobalConstants.TrophiesCountPerPage),
             };
 
             return this.View(viewModel);

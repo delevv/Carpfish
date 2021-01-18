@@ -19,7 +19,11 @@
 
         int GetCount();
 
-        int GetCount(LakesAllInputModel input);
+        int GetFreeCount();
+
+        int GetPaidCount();
+
+        int GetSearchCount(string type, string search);
 
         string GetLakeOwnerId(int lakeId);
 

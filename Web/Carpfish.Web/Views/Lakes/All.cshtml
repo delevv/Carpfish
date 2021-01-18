@@ -3,105 +3,106 @@
     this.ViewData["Title"] = "All Lakes";
 }
 
-<div class="row text-center mb-3">
-    <div class="col-md">
-        <select id="type" class="custom-select form-control">
-            @foreach (var type in Model.StatusTypes)
-            {
-                @if (Model.CurrStatus == type)
+<div class="offset-md-1">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <select id="type" class="custom-select form-control">
+                @foreach (var type in Model.StatusTypes)
                 {
-                    <option selected>@type</option>
+                    @if (Model.CurrStatus == type)
+                    {
+                        <option selected>@type</option>
+                    }
+                    else
+                    {
+                        <option>@type</option>
+                    }
                 }
-                else
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select id="order" class="custom-select form-control">
+                @foreach (var type in Model.OrderTypes)
                 {
-                    <option>@type</option>
+                    @if (Model.CurrOrder == type)
+                    {
+                        <option selected>@type</option>
+                    }
+                    else
+                    {
+                        <option>@type</option>
+                    }
                 }
-            }
-        </select>
+            </select>
+        </div>
+        <div class="col-md-3 input-group">
+            <input id="searchInput" class="form-control" type="search" placeholder="Search" aria-label="Search" value="@Model.Search">
+            <button id="search" class="btn btn-outline-success input-group-append"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="col-md-2">
+            <a asp-action="Add"><input class="btn btn-primary btn-md form-control" value="+Add" /></a>
+        </div>
     </div>
-    <div class="col-md">
-        <select id="order" class="custom-select form-control">
-            @foreach (var type in Model.OrderTypes)
-            {
-                @if (Model.CurrOrder == type)
-                {
-                    <option selected>@type</option>
-                }
-                else
-                {
-                    <option>@type</option>
-                }
-            }
-        </select>
-    </div>
-    <div class="col-md input-group">
-        <input id="searchInput" asp-for="Search" class="form-control" type="search" placeholder="Search" aria-label="Search" value="@Model.Search">
-        <button id="search" class="btn btn-outline-success input-group-append"><i class="fa fa-search"></i></button>
-    </div>
-    <div class="col-md">
-        <a asp-action="Add"><input class="btn btn-primary btn-md" value="Add Lake" /></a>
-    </div>
-</div>
-<div class="row">
-    @foreach (var lake in this.Model.Lakes)
-    {
-        <div class="card-deck col-md-4">
-            <div class="card mb-3">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <img src="@lake.ImgUrl" class="card-img-top embed-responsive-item" alt="@lake.Name image">
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="card-title">@lake.Name</h5>
+
+    <div class="row">
+        @foreach (var lake in this.Model.Lakes)
+        {
+            <div class="card-deck col-md-4">
+                <div class="card mb-3">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <img src="@lake.ImgUrl" class="card-img-top embed-responsive-item" alt="@lake.Name image">
                     </div>
-                    <div>
-                        <i class="far fa-flag text-info"></i>
-                        <span class="ml-2">@lake.CountryName</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-euro-sign @(lake.IsFree =="Free" ? "text-success" : "text-danger")"></i>
-                        <span class="ml-2">@lake.IsFree</span>
-                    </div>
-                    <div>
-                        <i class="far fa-star text-warning"></i>
-                        <span class="ml-2">@lake.AverageRating.ToString("f1")</span>
-                    </div>
-                    <div class="text-center">
-                        <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-success mt-2">Show More</a>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h5 class="card-title">@lake.Name</h5>
+                        </div>
+                        <div>
+                            <i class="far fa-flag text-info"></i>
+                            <span class="ml-2">@lake.CountryName</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-euro-sign @(lake.IsFree =="Free" ? "text-success" : "text-danger")"></i>
+                            <span class="ml-2">@lake.IsFree</span>
+                        </div>
+                        <div>
+                            <i class="far fa-star text-warning"></i>
+                            <span class="ml-2">@lake.AverageRating.ToString("f1")</span>
+                        </div>
+                        <div class="text-center">
+                            <a asp-action="ById" asp-route-id="@lake.Id" class="btn btn-success mt-2">Show More</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 <hr />
 <partial name="_PagingPartial" model="@Model" />
 
 @section Scripts{
     <script>
-        $('.custom-select').change(function (e) {
-            e.preventDefault();
+        function getQueryParams() {
             var type = $('#type').val();
             var order = $('#order').val();
             var search = $('#searchInput').val();
-            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}`;
+
+            return `type=${type}&&order=${order}&&search=${search}`;
+        }
+
+        $('.custom-select').change(function (e) {
+            window.location.href = window.location.pathname + '?' + getQueryParams();
         });
 
         $('#search').click(function (e) {
-            e.preventDefault();
-            var type = $('#type').val();
-            var order = $('#order').val();
-            var search = $('#searchInput').val();
-            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}`;
+            window.location.href = window.location.pathname + '?' + getQueryParams();
         });
 
-        $('.page-link').click(function () {
-            e.preventDefault();
-            var type = $('#type').val();
-            var order = $('#order').val();
-            var search = $('#searchInput').val();
-            var page = $(this).val();
-            window.location.href = window.location.pathname + `?type=${type}&&order=${order}&&search=${search}&&page=${page}`;
+        $('a.page-link').each(function () {
+            $(this).click(function (e) {
+                window.location.href = e.target.href + '&&' + getQueryParams();
+            });
         });
     </script>
 }
