@@ -87,16 +87,6 @@
             await this.lakeRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
-        {
-            return this.lakeRepository.All()
-                 .OrderByDescending(l => l.Id)
-                 .Skip((page - 1) * itemsPerPage)
-                 .Take(itemsPerPage)
-                 .To<T>()
-                 .ToList();
-        }
-
         public IEnumerable<T> GetAll<T>()
         {
             return this.lakeRepository.All()

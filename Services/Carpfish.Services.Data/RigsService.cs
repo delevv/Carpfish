@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Carpfish.Common;
     using Carpfish.Data.Common.Repositories;
     using Carpfish.Data.Models;
     using Carpfish.Services.Mapping;
@@ -79,14 +80,42 @@
             await this.rigsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
+        public IEnumerable<T> GetAll<T>(RigsAllInputModel input)
         {
-            return this.rigsRepository.All()
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .To<T>()
-                .ToList();
+            var query = this.rigsRepository.All().AsQueryable();
+
+            switch (input.Order)
+            {
+                case "Steps ASC":
+                    query = query.OrderBy(x => x.Steps.Count());
+                    break;
+                case "Steps DESC":
+                    query = query.OrderByDescending(x => x.Steps.Count());
+                    break;
+                case "Trophies ASC":
+                    query = query.OrderBy(x => x.Trophies.Count());
+                    break;
+                case "Trophies DESC":
+                    query = query.OrderByDescending(x => x.Trophies.Count());
+                    break;
+                case "Materials ASC":
+                    query = query.OrderBy(x => x.Materials.Count());
+                    break;
+                case "Materials DESC":
+                    query = query.OrderByDescending(x => x.Materials.Count());
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(input.Search))
+            {
+                query = query.Where(l => l.Name.ToLower().Contains(input.Search.ToLower()));
+            }
+
+            return query
+                    .Skip((input.Page - 1) * GlobalConstants.LakesCountPerPage)
+                    .Take(GlobalConstants.LakesCountPerPage)
+                    .To<T>()
+                    .ToList();
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
@@ -114,6 +143,14 @@
         public int GetCount()
         {
             return this.rigsRepository.All().Count();
+        }
+
+        public int GetSearchCount(string search)
+        {
+            return this.rigsRepository
+                  .AllAsNoTracking()
+                  .Where(l => l.Name.ToLower().Contains(search.ToLower()))
+                  .Count();
         }
 
         public IEnumerable<T> GetFiveRigsWithMostTrophies<T>()

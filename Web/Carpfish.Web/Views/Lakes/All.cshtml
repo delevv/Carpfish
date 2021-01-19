@@ -101,6 +101,7 @@
 
         $('a.page-link').each(function () {
             $(this).click(function (e) {
+                e.preventDefault();
                 window.location.href = e.target.href + '&&' + getQueryParams();
             });
         });

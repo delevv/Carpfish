@@ -50,19 +50,34 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All(int page = 1)
+        public IActionResult All(RigsAllInputModel input)
         {
-            if (page <= 0)
+            if (input.Page <= 0)
             {
                 return this.NotFound();
+            }
+
+            var rigs = this.rigsService.GetAll<RigInListViewModel>(input);
+
+            int rigsCount;
+            if (!string.IsNullOrEmpty(input.Search))
+            {
+                rigsCount = this.rigsService.GetSearchCount(input.Search);
+            }
+            else
+            {
+                rigsCount = this.rigsService.GetCount();
             }
 
             var viewModel = new RigsListViewModel()
             {
                 ItemsPerPage = GlobalConstants.RigsCountPerPage,
-                ItemsCount = this.rigsService.GetCount(),
-                PageNumber = page,
-                Rigs = this.rigsService.GetAll<RigInListViewModel>(page, GlobalConstants.RigsCountPerPage),
+                ItemsCount = rigsCount,
+                PageNumber = input.Page,
+                Rigs = rigs,
+                Search = input.Search,
+                CurrOrder = input.Order ?? "Order By",
+                OrderTypes = new string[] { "Order By", "Steps ASC", "Steps DESC", "Trophies ASC", "Trophies DESC", "Materials ASC", "Materials DESC" },
             };
 
             return this.View(viewModel);

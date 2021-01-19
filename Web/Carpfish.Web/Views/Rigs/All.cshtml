@@ -3,8 +3,33 @@
     this.ViewData["Title"] = "Rigs List";
 }
 
-<div class="row justify-content-center">
-    <a asp-action="Add"><input class="btn btn-primary" value="Add Rig" /></a>
+<div class="form-row justify-content-center">
+
+    <div class="col-md-3">
+        <select id="order" class="custom-select form-control">
+            @foreach (var type in Model.OrderTypes)
+            {
+                @if (Model.CurrOrder == type)
+                {
+                    <option selected>@type</option>
+                }
+                else
+                {
+                    <option>@type</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="col-md-3 input-group">
+        <input id="searchInput" class="form-control" type="search" placeholder="Search" aria-label="Search" value="@Model.Search">
+        <button id="search" class="btn btn-outline-success input-group-append"><i class="fa fa-search"></i></button>
+    </div>
+
+    <div class="justify-content-center">
+        <a asp-action="Add"><input class="btn btn-primary" value="+Add" /></a>
+    </div>
+
 </div>
 
 <div class="row col-md-10 offset-md-1 mt-2">
@@ -45,3 +70,29 @@
 
 <hr />
 <partial name="_PagingPartial" model="@Model" />
+
+@section Scripts{
+    <script>
+        function getQueryParams() {
+            var order = $('#order').val();
+            var search = $('#searchInput').val();
+
+            return `order=${order}&&search=${search}`;
+        }
+
+        $('.custom-select').change(function (e) {
+            window.location.href = window.location.pathname + '?' + getQueryParams();
+        });
+
+        $('#search').click(function (e) {
+            window.location.href = window.location.pathname + '?' + getQueryParams();
+        });
+
+        $('a.page-link').each(function () {
+            $(this).click(function (e) {
+                e.preventDefault();
+                window.location.href = e.target.href + '&&' + getQueryParams();
+            });
+        });
+    </script>
+}

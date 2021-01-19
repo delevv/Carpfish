@@ -7,7 +7,7 @@
 
     public interface IRigsService
     {
-        IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
+        IEnumerable<T> GetAll<T>(RigsAllInputModel input);
 
         Task AddAsync(AddRigInputModel input, string userId);
 
@@ -16,6 +16,8 @@
         IEnumerable<T> GetFiveRigsWithMostTrophies<T>();
 
         int GetCount();
+
+        int GetSearchCount(string search);
 
         string GetRigOwnerId(int rigId);
 
